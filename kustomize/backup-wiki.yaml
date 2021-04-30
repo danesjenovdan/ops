@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-wiki
+spec:
+  schedule: 0 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-wiki
+            image: backup
+            envFrom:
+            - configMapRef:
+                name: config-env
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup
+            env:
+              - name: DATABASE_NAME
+                value: outline
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure
