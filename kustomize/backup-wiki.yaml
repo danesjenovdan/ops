@@ -11,9 +11,6 @@ spec:
           containers:
           - name: backup-wiki
             image: backup
-            envFrom:
-            - configMapRef:
-                name: config-env
             args:
             - /bin/bash
             - /do_backup.sh
