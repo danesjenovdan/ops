@@ -9,6 +9,8 @@ resources:
   - backup-wiki.yaml
   - backup-pravnamreza.yaml
   - backup-parladata-ua.yaml
+  - backup-parladata-ajdovscina.yaml
+  - backup-parladata-hrastnik.yaml
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
