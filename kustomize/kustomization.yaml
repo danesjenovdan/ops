@@ -17,4 +17,4 @@ resources:
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
-  newTag: 'cfb7fdb93bbf403c9289a14be9e8abdd1655020c'
+  newTag: '137e61391fb64b8204a46daaab4be2941817f702'
