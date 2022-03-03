@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: backup
 resources:
   - backup-newsgradient.yaml
+  - backup-novdan.yaml
   - backup-plausible.yaml
   - backup-obljubadeladolg.yaml
   - backup-hudapobuda.yaml
