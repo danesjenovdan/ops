@@ -11,6 +11,7 @@ resources:
   - backup-parladata-hrastnik.yaml
   - backup-parladata-lendava.yaml
   - backup-parladata-ua.yaml
+  - backup-parladata-slovenija.yaml
   - backup-plausible.yaml
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
