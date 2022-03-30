@@ -15,6 +15,7 @@ resources:
   - backup-plausible.yaml
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
+  - backup-izboljsajmo-maribor.yaml
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
