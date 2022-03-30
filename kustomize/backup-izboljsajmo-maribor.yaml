@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-          - name: backup-izboljsajmo-maribor-ua
+          - name: backup-izboljsajmo-maribor
             image: backup
             args:
             - /bin/bash
