@@ -19,7 +19,7 @@ resources:
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
-  newTag: 'latest'
+  newTag: '01ed5aa5f2ae77cc9974560a8fc622658b86a3cc'
 - name: backup-mb
   newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-  newTag: 'latest'
+  newTag: '01ed5aa5f2ae77cc9974560a8fc622658b86a3cc'
