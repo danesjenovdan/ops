@@ -30,6 +30,14 @@ jobs:
           push: true
           tags: rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
       -
+        name: Build and push BACKUP
+        uses: docker/build-push-action@v2
+        with:
+          file: dockerfiles/backup-postgis-13.Dockerfile
+          context: .
+          push: true
+          tags: rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
+      -
         name: Update image versions in kustomize/kustomization.yaml
         run: |
           sed -i "s/newTag: .*\+/newTag\: '${{ github.sha }}'/" kustomize/kustomization.yaml

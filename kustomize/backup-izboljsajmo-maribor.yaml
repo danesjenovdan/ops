@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: backup-izboljsajmo-maribor
-            image: backup
+            image: backup-mb
             args:
             - /bin/bash
             - /do_backup.sh
