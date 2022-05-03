@@ -12,6 +12,7 @@ resources:
   - backup-parladata-lendava.yaml
   - backup-parladata-ua.yaml
   - backup-parladata-slovenija.yaml
+  - backup-parladata-bosna.yaml
   - backup-plausible.yaml
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
