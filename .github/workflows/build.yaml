@@ -30,13 +30,21 @@ jobs:
           push: true
           tags: rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
       -
-        name: Build and push BACKUP
+        name: Build and push BACKUP postgis
         uses: docker/build-push-action@v2
         with:
           file: dockerfiles/backup-postgis-13.Dockerfile
           context: .
           push: true
           tags: rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
+      -
+        name: Build and push BACKUP mariadb
+        uses: docker/build-push-action@v2
+        with:
+          file: dockerfiles/backup-mariadb.Dockerfile
+          context: .
+          push: true
+          tags: rg.fr-par.scw.cloud/djnd/backup-mariadb:${{ github.sha }}
       -
         name: Update image versions in kustomize/kustomization.yaml
         run: |
