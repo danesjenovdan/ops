@@ -23,4 +23,7 @@ images:
   newTag: 'fa6fe0d91e4789d51db178a530f2dc99869e1097'
 - name: backup-mb
   newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-  newTag: 'fa6fe0d91e4789d51db178a530f2dc99869e1097'
+  newTag: 'latest'
+- name: backup-mariadb
+  newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
+  newTag: 'latest'
