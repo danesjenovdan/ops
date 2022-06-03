@@ -21,10 +21,10 @@ resources:
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
-  newTag: 'latest'
+  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
 - name: backup-mb
   newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-  newTag: '508beba6d9130dfe05735980527dabc5818b184b'
+  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
 - name: backup-mariadb
   newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-  newTag: 'latest'
+  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
