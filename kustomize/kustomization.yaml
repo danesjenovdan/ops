@@ -17,13 +17,14 @@ resources:
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
   - backup-izboljsajmo-maribor.yaml
+  - backup-mautic.yaml
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
-  newTag: '508beba6d9130dfe05735980527dabc5818b184b'
+  newTag: 'latest'
 - name: backup-mb
   newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
   newTag: '508beba6d9130dfe05735980527dabc5818b184b'
 - name: backup-mariadb
-  newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-  newTag: '508beba6d9130dfe05735980527dabc5818b184b'
+  newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
+  newTag: 'latest'
