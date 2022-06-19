@@ -18,6 +18,7 @@ resources:
   - backup-wiki.yaml
   - backup-izboljsajmo-maribor.yaml
   - backup-mautic.yaml
+  - backup-plausible-clickhouse.yaml
 images:
 - name: backup
   newName: rg.fr-par.scw.cloud/djnd/backup
@@ -27,4 +28,6 @@ images:
   newTag: '508beba6d9130dfe05735980527dabc5818b184b'
 - name: backup-mariadb
   newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
+- name: clickhouse-backup
+  newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
   newTag: 'latest'
