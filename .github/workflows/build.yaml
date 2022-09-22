@@ -1,28 +1,27 @@
-name: Publish Docker image
+name: Build and publish Docker image
 on:
   push:
     branches:
       - 'k8s'
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Build and push Docker image to registry
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Check out the repo
+      - name: Check out the repo
         uses: actions/checkout@v2
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to Scaleway
+
+      - name: Login to Scaleway
         uses: docker/login-action@v1
         with:
           registry: rg.fr-par.scw.cloud/djnd
           username: nologin
           password: ${{ secrets.SCW_SECRET_TOKEN }}
-      -
-        name: Build and push BACKUP
+
+      - name: Build and push backup
         uses: docker/build-push-action@v2
         with:
           file: dockerfiles/backup.Dockerfile
@@ -31,8 +30,8 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backup:latest
-      -
-        name: Build and push BACKUP postgis
+
+      - name: Build and push postgis backup
         uses: docker/build-push-action@v2
         with:
           file: dockerfiles/backup-postgis-13.Dockerfile
@@ -41,8 +40,8 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backup-postgis-13:latest
-      -
-        name: Build and push BACKUP mariadb
+
+      - name: Build and push mariadb backup
         uses: docker/build-push-action@v2
         with:
           file: dockerfiles/backup-mariadb.Dockerfile
@@ -51,8 +50,8 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backup-mariadb:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backup-mariadb:latest
-      -
-        name: Build and push CLICKHOUSE BACKUP
+
+      - name: Build and push clickhouse backup
         uses: docker/build-push-action@v2
         with:
           file: dockerfiles/clickhouse-backup.Dockerfile
@@ -61,22 +60,13 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/clickhouse-backup:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/clickhouse-backup:latest
-      -
-        name: Update image versions in kustomize/kustomization.yaml
+
+      - name: Update image versions in kustomize/kustomization.yaml
         run: |
           sed -i "s/newTag: .*\+/newTag\: '${{ github.sha }}'/" kustomize/kustomization.yaml
-      -
-        name: Commit and push new image versions
-        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
+
+      - name: Commit and push new image versions
+        uses: EndBug/add-and-commit@v9
         with:
           add: '.'
-          author_name: GitHub action
-
-          # The message for the commit
-          # Default: 'Commit from GitHub Actions (name of the workflow)'
           message: 'Update image versions in kustomize/kustomization.yaml'
-
-          # The flag used on the pull strategy. Use NO-PULL to avoid the action pulling at all.
-          # Default: '--no-rebase'
-          # 'NO-PULL or --no-rebase or --no-ff or --rebase'
-          pull_strategy: 'NO-PULL'
