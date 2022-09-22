@@ -20,3 +20,10 @@ mcrypt ${DUMP_FILE}.bz2 -k $DB_BACKUP_PASSWORD
 aws s3 cp ${DUMP_FILE}.bz2.nc $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
     --region=fr-par
+
+# upload the database as latest
+cp ${DUMP_FILE}.bz2.nc ${DATABASE_NAME}_db_latest.bz2.nc
+
+aws s3 cp ${DATABASE_NAME}_db_latest.bz2.nc $S3_BACKUP_PATH \
+    --endpoint-url=https://s3.fr-par.scw.cloud \
+    --region=fr-par

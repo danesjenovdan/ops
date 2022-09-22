@@ -1,0 +1,9 @@
+{
+    "CORSRules": [{
+        "AllowedOrigins": ["https://wiki.k8s.djnd.si", "https://wiki.danesjenovdan.si"],
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["GET", "HEAD", "POST", "PUT", "DELETE"],
+        "MaxAgeSeconds": 3000,
+        "ExposeHeaders": ["Etag"]
+    }]
+}

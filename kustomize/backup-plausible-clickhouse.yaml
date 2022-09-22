@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-plausible-clickhouse
+spec:
+  schedule: 20 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: clickhouse-backup
+            image: rg.fr-par.scw.cloud/djnd/clickhouse-backup # TODO
+            command:
+            - bash
+            - -c
+            - ./do_clickhouse_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup
+            env:
+              - name: CLICKHOUSE_HOST
+                value: clickhouse.shared
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure

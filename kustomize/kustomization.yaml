@@ -3,28 +3,32 @@ kind: Kustomization
 namespace: backup
 resources:
   - backup-hudapobuda.yaml
+  - backup-izboljsajmo-maribor.yaml
+  - backup-mautic.yaml
   - backup-najemniski-sos.yaml
   - backup-newsgradient.yaml
   - backup-novdan.yaml
   - backup-obljubadeladolg.yaml
   - backup-parladata-ajdovscina.yaml
+  - backup-parladata-bosna.yaml
   - backup-parladata-hrastnik.yaml
   - backup-parladata-lendava.yaml
-  - backup-parladata-ua.yaml
   - backup-parladata-slovenija.yaml
-  - backup-parladata-bosna.yaml
+  - backup-parladata-ua.yaml
+  - backup-plausible-clickhouse.yaml
   - backup-plausible.yaml
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
-  - backup-izboljsajmo-maribor.yaml
-  - backup-mautic.yaml
 images:
-- name: backup
-  newName: rg.fr-par.scw.cloud/djnd/backup
-  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
-- name: backup-mb
-  newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
-- name: backup-mariadb
-  newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-  newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+  - name: backup
+    newName: rg.fr-par.scw.cloud/djnd/backup
+    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+  - name: backup-mb
+    newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
+    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+  - name: backup-mariadb
+    newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
+    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+  - name: clickhouse-backup
+    newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
+    newTag: 'latest'
