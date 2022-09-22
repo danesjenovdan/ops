@@ -22,13 +22,13 @@ resources:
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
-    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+    newTag: 'd18f2ec442db430727c2c5cb6586218129130fc4'
   - name: backup-mb
     newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+    newTag: 'd18f2ec442db430727c2c5cb6586218129130fc4'
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-    newTag: '69eebccc369d270a208e0163a80789ddf8bbd99d'
+    newTag: 'd18f2ec442db430727c2c5cb6586218129130fc4'
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
-    newTag: 'latest'
+    newTag: 'd18f2ec442db430727c2c5cb6586218129130fc4'
