@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weblate
+  labels:
+    app: weblate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weblate
+  template:
+    metadata:
+      labels:
+        app: weblate
+    spec:
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: weblate-persistent-storage
+          persistentVolumeClaim:
+            claimName: weblate-pvc
+      containers:
+        - name: weblate
+          image: weblate/weblate
+          volumeMounts:
+            - name: weblate-persistent-storage
+              mountPath: /app/data
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: weblate-credentials
