@@ -28,7 +28,9 @@ jobs:
           file: dockerfiles/backup.Dockerfile
           context: .
           push: true
-          tags: rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup:latest
       -
         name: Build and push BACKUP postgis
         uses: docker/build-push-action@v2
@@ -36,7 +38,9 @@ jobs:
           file: dockerfiles/backup-postgis-13.Dockerfile
           context: .
           push: true
-          tags: rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup-postgis-13:latest
       -
         name: Build and push BACKUP mariadb
         uses: docker/build-push-action@v2
@@ -44,7 +48,9 @@ jobs:
           file: dockerfiles/backup-mariadb.Dockerfile
           context: .
           push: true
-          tags: rg.fr-par.scw.cloud/djnd/backup-mariadb:${{ github.sha }}
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backup-mariadb:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup-mariadb:latest
       -
         name: Build and push CLICKHOUSE BACKUP
         uses: docker/build-push-action@v2
@@ -52,7 +58,9 @@ jobs:
           file: dockerfiles/clickhouse-backup.Dockerfile
           context: .
           push: true
-          tags: rg.fr-par.scw.cloud/djnd/clickhouse-backup:${{ github.sha }}
+          tags: |
+            rg.fr-par.scw.cloud/djnd/clickhouse-backup:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/clickhouse-backup:latest
       -
         name: Update image versions in kustomize/kustomization.yaml
         run: |
