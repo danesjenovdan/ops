@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # set backup file name
-export DUMP_FILE='\tmp\'${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.sql
+export DUMP_FILE='/tmp/'${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.sql
 
 echo "[client]" > /tmp/.my.cnf
 echo 'user = '$DATABASE_USER >> /tmp/.my.cnf
 echo 'password = '$MARIADB_PASSWORD >> /tmp/.my.cnf
+echo 'host = ' $PGHOST >> /tmp/.my.cnf
 
 mysqldump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
 
