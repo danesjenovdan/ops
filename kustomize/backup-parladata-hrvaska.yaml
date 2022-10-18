@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: backup-parladata-slovenija
+  name: backup-parladata-hrvaska
 spec:
   schedule: 48 2 * * *
   jobTemplate:
@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-          - name: backup-parladata-slovenija
+          - name: backup-parladata-hrvaska
             image: backup
             args:
             - /bin/bash
