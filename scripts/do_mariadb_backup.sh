@@ -5,7 +5,7 @@ export DUMP_FILE='/tmp/'${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.sql
 
 echo "[mysqldump]" > /tmp/.my.cnf
 echo 'user='$DATABASE_USER >> /tmp/.my.cnf
-echo 'password='$MARIADB_PASSWORD >> /tmp/.my.cnf
+echo 'password='$DATABASE_PASSWORD >> /tmp/.my.cnf
 echo 'host='$DATABASE_HOST >> /tmp/.my.cnf
 echo 'port=3306' >> /tmp/.my.cnf
 
