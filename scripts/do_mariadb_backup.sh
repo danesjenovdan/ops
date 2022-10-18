@@ -7,6 +7,7 @@ echo "[mysqldump]" > /tmp/.my.cnf
 echo 'user='$DATABASE_USER >> /tmp/.my.cnf
 echo 'password='$MARIADB_PASSWORD >> /tmp/.my.cnf
 echo 'host='$DATABASE_HOST >> /tmp/.my.cnf
+echo 'port=3306'
 
 mysqldump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
 
