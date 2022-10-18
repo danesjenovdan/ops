@@ -19,7 +19,7 @@ spec:
                   name: secrets-backup
             env:
               - name: DATABASE_NAME
-                value: parladata_slovenija_8
+                value: parlameter_hrvaska
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure
