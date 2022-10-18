@@ -3,8 +3,11 @@
 # set backup file name
 export DUMP_FILE=${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.sql
 
-# dump the database
-mysqldump -A -u $DATABASE_USER -p $MARIADB_PASSWORD $DATABASE_NAME > $DUMP_FILE
+echo "[client]" > /tmp/.my.cnf
+echo 'user = '$DATABASE_USER >> /tmp/.my.cnf
+echo 'password = '$MARIADB_PASSWORD >> /tmp/.my.cnf
+
+mysqldump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
 
 # zip the database
 bzip2 $DUMP_FILE
