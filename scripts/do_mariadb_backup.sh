@@ -4,8 +4,7 @@
 export DUMP_FILE=${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.sql
 
 # dump the database
-MARIADB_PASSWORD=$DATABASE_PASSWORD \
-    mysqldump -A -u $DATABASE_USER > $DUMP_FILE
+mysqldump -A -u $DATABASE_USER -p $MARIADB_PASSWORD $DATABASE_NAME > $DUMP_FILE
 
 # zip the database
 bzip2 $DUMP_FILE
