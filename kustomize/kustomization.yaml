@@ -19,6 +19,7 @@ resources:
   - backup-plausible.yaml
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
+  - backup-odprti-racuni.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
