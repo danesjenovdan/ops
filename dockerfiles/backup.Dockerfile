@@ -1,4 +1,17 @@
 FROM mdillon/postgis
+
+# HACK: mdillon/postgis runs from postgres 11 on debian stretch
+#       postgres removed official support for stretch on 2022-11-07
+#       https://www.postgresql.org/message-id/Y2kmqL%2BpCuSZiQBV%40msg.df7cb.de
+#       remove this hack when we update to newer postgres docker image
+#
+#       this replaces apt repo with apt-archive repo
+RUN rm /etc/apt/sources.list.d/pgdg.list
+RUN apt-get update && apt-get -y install apt-transport-https
+RUN echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+RUN apt-get update
+# END HACK
+
 RUN apt update -y
 RUN apt install -y python3 python3-pip mcrypt
 
