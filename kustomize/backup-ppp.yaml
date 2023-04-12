@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-ppp
+spec:
+  schedule: 44 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ppp
+            image: backup
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup
+            env:
+              - name: DATABASE_NAME
+                value: ppp
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure
