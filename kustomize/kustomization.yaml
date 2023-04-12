@@ -22,6 +22,7 @@ resources:
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
   - backup-odprti-racuni.yaml
+  - backup-ppp.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
