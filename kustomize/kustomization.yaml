@@ -23,6 +23,7 @@ resources:
   - backup-wiki.yaml
   - backup-odprti-racuni.yaml
   - backup-ppp.yaml
+  - backup-ppp-hr.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
