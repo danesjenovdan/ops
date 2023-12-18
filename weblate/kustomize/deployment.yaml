@@ -22,7 +22,7 @@ spec:
             claimName: weblate-pvc
       containers:
         - name: weblate
-          image: weblate/weblate@4
+          image: weblate/weblate:4
           volumeMounts:
             - name: weblate-persistent-storage
               mountPath: /app/data
