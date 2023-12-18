@@ -6,14 +6,15 @@ FROM mdillon/postgis
 #       remove this hack when we update to newer postgres docker image
 #
 #       this replaces apt repo with apt-archive repo
+RUN rm /etc/apt/sources.list
 RUN rm /etc/apt/sources.list.d/pgdg.list
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 RUN apt-get update && apt-get -y install apt-transport-https
 RUN echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 RUN apt-get update
 # END HACK
 
-RUN apt update -y
-RUN apt install -y python3 python3-pip mcrypt
+RUN apt-get update && apt-get install -y python3 python3-pip mcrypt
 
 # aws cli install and setup
 RUN pip3 install awscli
