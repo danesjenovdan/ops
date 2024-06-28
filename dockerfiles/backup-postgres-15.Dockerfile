@@ -1,5 +1,5 @@
 
-FROM bitnami/postgresql:15.7.0
+FROM bitnami/postgresql:15.7.0-debian-12-r11
 RUN apt update -y
 RUN apt install -y python3 python3-pip mcrypt
 
