@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-consul-novo-mesto
+spec:
+  schedule: 18 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: consul-novo-mesto
+            image: backup-pg-15
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-pg-15
+            env:
+              - name: DATABASE_NAME
+                value: consul_novo_mesto
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure
