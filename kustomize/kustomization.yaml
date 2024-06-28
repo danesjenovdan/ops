@@ -25,7 +25,9 @@ resources:
   - backup-ppp.yaml
   - backup-ppp-hr.yaml
   - backup-rog.yaml
+  # postgres 15
   - backup-danesjenovdan-si.yaml
+  - backup-consul-rog.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
