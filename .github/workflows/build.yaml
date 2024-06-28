@@ -70,3 +70,13 @@ jobs:
         with:
           add: '.'
           message: 'Update image versions in kustomize/kustomization.yaml'
+
+      - name: Build and push backup-pg-15
+        uses: docker/build-push-action@v3
+        with:
+          file: dockerfiles/backup-postgres-15.Dockerfile
+          context: .
+          push: true
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backup-pg-15:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup-pg-15:latest
