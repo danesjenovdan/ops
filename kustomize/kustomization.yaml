@@ -25,6 +25,7 @@ resources:
   - backup-ppp.yaml
   - backup-ppp-hr.yaml
   - backup-rog.yaml
+  - backup-danesjenovdan-si.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
@@ -38,3 +39,9 @@ images:
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
     newTag: '9d37dbd378b1285d886a489347715c25bc9123e9'
+  - name: backup-pg-15
+    newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
+    newTag: 'latest'
+  - name: backup-pg-15
+    newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
+    newTag: 'latest'
