@@ -5,8 +5,8 @@ RUN apt update -y
 RUN apt install -y python3 python3-pip mcrypt
 
 # aws cli install and setup
-RUN pip3 install awscli
-RUN pip3 install awscli-plugin-endpoint
+RUN apt install python3-awscli
+RUN apt install python3-awscli-plugin-endpoint
 USER 1001
 
 RUN aws configure set plugins.endpoint awscli_plugin_endpoint
