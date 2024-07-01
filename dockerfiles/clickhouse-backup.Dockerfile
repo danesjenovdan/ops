@@ -1,6 +1,6 @@
 FROM yandex/clickhouse-client:latest
-RUN apt update -y
-RUN apt install -y python3 python3-pip mcrypt wget
+RUN apt-get update -y
+RUN apt-get install -y python3 python3-pip mcrypt wget
 
 # aws cli install and setup
 RUN pip3 install awscli
