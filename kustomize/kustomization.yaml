@@ -31,19 +31,19 @@ resources:
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
   - name: backup-mb
     newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
   - name: backup-pg-15
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
   - name: backup-pg-15
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
-    newTag: '85ec4a9f4a3123e2b7fedd7bb054ad4110feb563'
+    newTag: '3801e4fd02bc37c046890cc23f44b90117936dc8'
