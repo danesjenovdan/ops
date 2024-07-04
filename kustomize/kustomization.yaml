@@ -32,6 +32,8 @@ resources:
   - backup-consul-nova-gorica.yaml
   - backup-consul-novo-mesto.yaml
   - backup-parlameter-trbovlje.yaml
+  - backup-izvoli-eu.yaml
+  - backup-weblate.yaml
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
