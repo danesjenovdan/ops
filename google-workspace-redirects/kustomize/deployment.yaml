@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: google-workspace-redirects
+  labels:
+    app: google-workspace-redirects
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: google-workspace-redirects
+  template:
+    metadata:
+      labels:
+        app: google-workspace-redirects
+    spec:
+      containers:
+        - name: google-workspace-redirects
+          image: google-workspace-redirects
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 50m
+            limits:
+              memory: 50Mi
+              cpu: 50m
