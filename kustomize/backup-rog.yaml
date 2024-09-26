@@ -9,14 +9,14 @@ spec:
       template:
         spec:
           containers:
-          - name: rog
-            image: backup
+          - name: backup-rog
+            image: backup-pg-15
             args:
             - /bin/bash
             - /do_backup.sh
             envFrom:
               - secretRef:
-                  name: secrets-backup
+                  name: secrets-backup-pg-15
             env:
               - name: DATABASE_NAME
                 value: rog
