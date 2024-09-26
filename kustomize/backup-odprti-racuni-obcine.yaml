@@ -1,15 +1,15 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: backup-odprti-racuni
+  name: backup-odprti-racuni-obcine
 spec:
-  schedule: 25 2 * * *
+  schedule: 29 2 * * *
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: backup-odprti-racuni
+          - name: backup-odprti-racuni-obcine
             image: backup-pg-15
             args:
             - /bin/bash
@@ -19,7 +19,7 @@ spec:
                   name: secrets-backup-pg-15
             env:
               - name: DATABASE_NAME
-                value: odprti_racuni
+                value: odprti_racuni_obcine
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure

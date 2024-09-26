@@ -22,6 +22,7 @@ resources:
   - backup-pravnamreza.yaml
   - backup-wiki.yaml
   - backup-odprti-racuni.yaml
+  - backup-odprti-racuni-obcine.yaml
   - backup-ppp.yaml
   - backup-ppp-hr.yaml
   - backup-rog.yaml
