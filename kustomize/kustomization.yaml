@@ -2,39 +2,73 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: backup
 resources:
-  - backup-hudapobuda.yaml
+  
+  # postgis
   - backup-izboljsajmo-maribor.yaml
+
+  # mariadb
   - backup-mautic.yaml
+
+  # clickhouse
+  - backup-plausible-clickhouse.yaml
+
+  # postgres 11 wating to be "upgraded"
+  - backup-plausible.yaml
+
+  # postgres 15
+
+  - backup-cnvos-acf.yaml
+  - backup-cnvos.yaml
+  - backup-consul-koper.yaml
+  - backup-consul-maribor.yaml
+  - backup-consul-medvode.yaml
+  - backup-consul-nova-gorica.yaml
+  - backup-consul-novo-mesto.yaml
+  - backup-consul-rog.yaml
+  - backup-consul-staging.yaml
+  - backup-consul-trebnje.yaml
+  - backup-consul-trzic.yaml
+  - backup-danesjenovdan-si.yaml
+  - backup-disco.yaml
+  - backup-dobrodelen.yaml
+  - backup-glasljudstva.yaml
+  - backup-hudapobuda.yaml
+  - backup-izvoli-eu.yaml
+  - backup-lesson-plans.yaml
+  - backup-melita.yaml
   - backup-najemniski-sos.yaml
   - backup-newsgradient.yaml
   - backup-novdan.yaml
   - backup-obljubadeladolg.yaml
+  - backup-odprti-racuni-obcine.yaml
+  - backup-odprti-racuni.yaml
   - backup-parladata-ajdovscina.yaml
   - backup-parladata-bosna.yaml
   - backup-parladata-hrastnik.yaml
-  - backup-parladata-lendava.yaml
-  - backup-parladata-slovenija.yaml
   - backup-parladata-hrvaska.yaml
-  - backup-parladata-ua.yaml
+  - backup-parladata-lendava.yaml
+  - backup-parladata-ljubljana.yaml
   - backup-parladata-medvode.yaml
-  - backup-plausible-clickhouse.yaml
-  - backup-plausible.yaml
-  - backup-pravnamreza.yaml
-  - backup-wiki.yaml
-  - backup-odprti-racuni.yaml
-  - backup-odprti-racuni-obcine.yaml
-  - backup-ppp.yaml
-  - backup-ppp-hr.yaml
-  - backup-rog.yaml
-  # postgres 15
-  - backup-danesjenovdan-si.yaml
-  - backup-consul-rog.yaml
-  - backup-consul-trzic.yaml
-  - backup-consul-nova-gorica.yaml
-  - backup-consul-novo-mesto.yaml
+  - backup-parladata-slovenija.yaml
+  - backup-parladata-ua.yaml
   - backup-parlameter-trbovlje.yaml
-  - backup-izvoli-eu.yaml
+  - backup-penpot.yaml
+  - backup-podpri.yaml
+  - backup-ppp-hr.yaml
+  - backup-ppp.yaml
+  - backup-pravnamreza.yaml
+  - backup-rog-stage.yaml
+  - backup-rog.yaml
+  - backup-stanovanjske-zadruge-zemljevid.yaml
+  - backup-twito.yaml
+  - backup-vinopolis.yaml
   - backup-weblate.yaml
+  - backup-wiki-outline.yaml
+  
+
+  #TODO
+  # consul_hrpelje_kozina
+
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
