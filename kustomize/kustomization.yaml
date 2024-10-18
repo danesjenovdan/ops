@@ -37,7 +37,7 @@ resources:
   - backup-lesson-plans.yaml
   - backup-melita.yaml
   - backup-najemniski-sos.yaml
-  - backup-newsgradient.yaml
+  # - backup-newsgradient.yaml archived
   - backup-novdan.yaml
   - backup-obljubadeladolg.yaml
   - backup-odprti-racuni-obcine.yaml
