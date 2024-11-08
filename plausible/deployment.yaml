@@ -19,54 +19,13 @@ spec:
         - name: scripts-volume
           configMap:
             name: plausible2-analytics
-      # initContainers:
-      #   - name: create-db
-      #     image: plausible2
-      #     command:
-      #       - 'sh'
-      #       - '/entrypoint.sh'
-      #       - 'db'
-      #       - 'createdb'
-      #     env:
-      #       - name: DATABASE_URL
-      #         valueFrom:
-      #           secretKeyRef:
-      #             key: DATABASE_URL_15
-      #             name: plausible-plausible-analytics
-      #     volumeMounts:
-      #       - name: app-tmp
-      #         mountPath: /app/tmp
-      #     resources: {}
-      #
-      #   - name: migrate-db
-      #     image: plausible2
-      #     command:
-      #       - 'sh'
-      #       - '/entrypoint.sh'
-      #       - 'db'
-      #       - 'migrate'
-      #     env:
-      #       - name: DATABASE_URL
-      #         valueFrom:
-      #           secretKeyRef:
-      #             key: DATABASE_URL_15
-      #             name: plausible-plausible-analytics
-      #     volumeMounts:
-      #       - name: app-tmp
-      #         mountPath: /app/tmp
-      #     resources: {}
-
-      containers:
-        - name: plausible2-analytics
+      initContainers:
+        - name: create-db
           image: plausible2
-          command: ['/entrypoint.sh', 'run']
-          # command: [ "sleep" ]
-          # args: [ "infinity" ]
-          ports:
-            - name: http
-              containerPort: 8000
-              protocol: TCP
-          
+          command:
+            - "/entrypoint.sh"
+            - "db"
+            - "createdb"
           env:
             - name: ADMIN_USER_EMAIL
               valueFrom:
@@ -144,14 +103,211 @@ spec:
                   name: plausible-plausible-analytics
                   key: TWITTER_ACCESS_TOKEN_SECRET
             - name: BASE_URL
-              value: https://plausible2.lb.djnd.si
+              value: https://plausible.lb.djnd.si
             - name: RELEASE_DISTRIBUTION
-              value: ''
+              value: ""
             - name: TOTP_VAULT_KEY
               valueFrom:
                 secretKeyRef:
                   name: plausible-plausible-analytics
-                  key: TOTP_VAULT_KEY              
+                  key: TOTP_VAULT_KEY
+          volumeMounts:
+            - name: app-tmp
+              mountPath: /app/tmp
+          resources: {}
+
+        - name: migrate-db
+          image: plausible2
+          command:
+            - "/entrypoint.sh"
+            - "db"
+            - "migrate"
+          env:
+            - name: ADMIN_USER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_EMAIL
+            - name: ADMIN_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_NAME
+            - name: ADMIN_USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_PWD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: DATABASE_URL_15
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SECRET_KEY_BASE
+            - name: CLICKHOUSE_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: CLICKHOUSE_DATABASE_URL
+            - name: MAILER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: MAILER_EMAIL
+            - name: SMTP_HOST_ADDR
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_HOST_ADDR
+            - name: SMTP_HOST_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_HOST_PORT
+            - name: SMTP_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_USER_NAME
+            - name: SMTP_USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_USER_PWD
+            - name: TWITTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_CONSUMER_KEY
+            - name: TWITTER_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_CONSUMER_SECRET
+            - name: TWITTER_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_ACCESS_TOKEN
+            - name: TWITTER_ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_ACCESS_TOKEN_SECRET
+            - name: BASE_URL
+              value: https://plausible.lb.djnd.si
+            - name: RELEASE_DISTRIBUTION
+              value: ""
+            - name: TOTP_VAULT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TOTP_VAULT_KEY
+          volumeMounts:
+            - name: app-tmp
+              mountPath: /app/tmp
+          resources: {}
+
+      containers:
+        - name: plausible2-analytics
+          image: plausible2
+          command: ["/entrypoint.sh", "run"]
+          # command: [ "sleep" ]
+          # args: [ "infinity" ]
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+          env:
+            - name: ADMIN_USER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_EMAIL
+            - name: ADMIN_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_NAME
+            - name: ADMIN_USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: ADMIN_USER_PWD
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: DATABASE_URL_15
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SECRET_KEY_BASE
+            - name: CLICKHOUSE_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: CLICKHOUSE_DATABASE_URL
+            - name: MAILER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: MAILER_EMAIL
+            - name: SMTP_HOST_ADDR
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_HOST_ADDR
+            - name: SMTP_HOST_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_HOST_PORT
+            - name: SMTP_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_USER_NAME
+            - name: SMTP_USER_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: SMTP_USER_PWD
+            - name: TWITTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_CONSUMER_KEY
+            - name: TWITTER_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_CONSUMER_SECRET
+            - name: TWITTER_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_ACCESS_TOKEN
+            - name: TWITTER_ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TWITTER_ACCESS_TOKEN_SECRET
+            - name: BASE_URL
+              value: https://plausible.lb.djnd.si
+            - name: RELEASE_DISTRIBUTION
+              value: ""
+            - name: TOTP_VAULT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: plausible-plausible-analytics
+                  key: TOTP_VAULT_KEY
           resources: {}
           volumeMounts:
             - name: app-tmp

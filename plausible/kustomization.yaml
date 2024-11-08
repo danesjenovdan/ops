@@ -6,7 +6,7 @@ resources:
   - service.yaml
   - ingress.yaml
 images:
-- name: plausible2
-  newName: ghcr.io/plausible/community-edition # new image >= v2.1.0
-  #newName: plausible/analytics # old image < v2.1.0
-  newTag: 'v2.1.0'
+  - name: plausible2
+    newName: ghcr.io/plausible/community-edition # new image >= v2.1.0
+    #newName: plausible/analytics # old image < v2.1.0
+    newTag: "v2.1.4"
