@@ -22,7 +22,7 @@ get_tables_command = [
     f"--user={username}",
 ]
 
-
+call("pwd")
 out = run(get_tables_command, capture_output=True)
 tables = out.stdout.splitlines()
 for table in tables:

@@ -8,7 +8,7 @@ mkdir $BACKUP_NAME
 cd $BACKUP_NAME
 
 # dump the database
-python3 get_clickhouse_dumps.py ${CLICKHOUSE_HOST} ${DATABASE_NAME} ${DATABASE_USERNAME} ${DATABASE_PASSWORD}
+python3 ../get_clickhouse_dumps.py ${CLICKHOUSE_HOST} ${DATABASE_NAME} ${DATABASE_USERNAME} ${DATABASE_PASSWORD}
 
 # # zip the database
 cd ..
