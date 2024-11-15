@@ -1,20 +1,14 @@
 #!/bin/bash
 
 # set backup name
-export BACKUP_NAME=${DATABASE_NAME}_clickhouse_`date +%Y%m%d_%H%M%S`
+export BACKUP_NAME=${DATABASE_NAME}_clickhouse_`date +%Y%m%d`
 
 # create backup dir
 mkdir $BACKUP_NAME
 cd $BACKUP_NAME
 
 # dump the database
-clickhouse-client --host=clickhouse.shared --query="SHOW CREATE TABLE plausible.events" --format=TabSeparatedRaw > events_metadata.tsv
-clickhouse-client --host=clickhouse.shared --query="SHOW CREATE TABLE plausible.sessions" --format=TabSeparatedRaw > sessions_metadata.tsv
-clickhouse-client --host=clickhouse.shared --query="SHOW CREATE TABLE plausible.schema_migrations" --format=TabSeparatedRaw > schema_migrations_metadata.tsv
-
-clickhouse-client --host=clickhouse.shared --query "SELECT * FROM plausible.events FORMAT TabSeparated" > events_table.tsv
-clickhouse-client --host=clickhouse.shared --query "SELECT * FROM plausible.sessions FORMAT TabSeparated" > sessions_table.tsv
-clickhouse-client --host=clickhouse.shared --query "SELECT * FROM plausible.schema_migrations FORMAT TabSeparated" > schema_migrations_table.tsv
+python3 get_clickhouse_dumps.py ${CLICKHOUSE_HOST} ${DATABASE_NAME} ${DATABASE_USERNAME} ${DATABASE_PASSWORD}
 
 # # zip the database
 cd ..
