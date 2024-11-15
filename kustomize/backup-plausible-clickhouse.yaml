@@ -9,20 +9,22 @@ spec:
       template:
         spec:
           containers:
-          - name: clickhouse-backup
-            image: rg.fr-par.scw.cloud/djnd/clickhouse-backup # TODO
-            # command:
-            #- bash
-            #- -c
-            #- ./do_clickhouse_backup.sh
-            command: [ "/bin/bash", "-c", "--" ]
-            args: [ "while true; do sleep 30; done;" ]
+          - name: backup-plausible-clickhouse
+            image: clickhouse-backup
+            command:
+            - bash
+            - -c
+            - ./do_clickhouse_backup.sh
             envFrom:
               - secretRef:
                   name: secrets-backup
+              - secretRef:
+                  name: secrets-clickhouse-backup
             env:
               - name: CLICKHOUSE_HOST
-                value: clickhouse.shared
+                value: chi-clickhouse-simple-0-0.shared
+              - name: DATABASE_NAME
+                value: plausible
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure

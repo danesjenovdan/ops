@@ -11,7 +11,7 @@ COPY config/aws.config $HOME/.aws/config
 # copy backup script
 COPY scripts/do_clickhouse_backup.sh /
 COPY scripts/apply_clickhouse_backup.sh /
+COPY scripts/get_clickhouse_dumps.py /
 RUN chmod +x /do_clickhouse_backup.sh
 RUN chmod +x /apply_clickhouse_backup.sh
-
-ENTRYPOINT ["/bin/sh", "-c"]
+RUN chmod +x /get_clickhouse_dumps.py
