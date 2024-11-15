@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set backup file name
-export DUMP_FILE=${DATABASE_NAME}_db_`date +%Y%m%d_%H%M%S`.pgdump
+export DUMP_FILE=${DATABASE_NAME}_DB_`date +%Y-%m-%d`.pgdump
 
 # dump the database
 PGPASSWORD=$DATABASE_PASSWORD \

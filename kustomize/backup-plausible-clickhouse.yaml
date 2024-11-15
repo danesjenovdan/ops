@@ -11,10 +11,12 @@ spec:
           containers:
           - name: clickhouse-backup
             image: rg.fr-par.scw.cloud/djnd/clickhouse-backup # TODO
-            command:
-            - bash
-            - -c
-            - ./do_clickhouse_backup.sh
+            # command:
+            #- bash
+            #- -c
+            #- ./do_clickhouse_backup.sh
+            command: [ "/bin/bash", "-c", "--" ]
+            args: [ "while true; do sleep 30; done;" ]
             envFrom:
               - secretRef:
                   name: secrets-backup

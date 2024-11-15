@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: plausible2-analytics
+spec:
+  selector:
+    app: plausible2-analytics
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
