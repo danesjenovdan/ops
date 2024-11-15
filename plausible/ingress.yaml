@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - plausible2.lb.djnd.si
+        - plausible.lb.djnd.si
       secretName: plausible2-tls
   rules:
-    - host: plausible2.lb.djnd.si
+    - host: plausible.lb.djnd.si
       http:
         paths:
           - path: /
