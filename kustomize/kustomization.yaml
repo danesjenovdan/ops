@@ -72,16 +72,16 @@ resources:
 images:
   - name: backup
     newName: rg.fr-par.scw.cloud/djnd/backup
-    newTag: 'a34e91a4e6a1e695aba68f232c47166da822005c'
+    newTag: '258e7768c60c1ccf0180cd5c8eb33a32b77277be'
   - name: backup-mb
     newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-    newTag: 'a34e91a4e6a1e695aba68f232c47166da822005c'
+    newTag: '258e7768c60c1ccf0180cd5c8eb33a32b77277be'
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-    newTag: 'a34e91a4e6a1e695aba68f232c47166da822005c'
+    newTag: '258e7768c60c1ccf0180cd5c8eb33a32b77277be'
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
-    newTag: 'a34e91a4e6a1e695aba68f232c47166da822005c'
+    newTag: '258e7768c60c1ccf0180cd5c8eb33a32b77277be'
   - name: backup-pg-15
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
-    newTag: 'a34e91a4e6a1e695aba68f232c47166da822005c'
+    newTag: '258e7768c60c1ccf0180cd5c8eb33a32b77277be'
