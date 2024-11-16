@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set backup name
-export BACKUP_NAME=${DATABASE_NAME}_clickhouse_`date +%Y%m%d`
+export BACKUP_NAME=${DATABASE_NAME}_clickhouse_DB_`date +%Y%m%d`
 
 # create backup dir
 mkdir $BACKUP_NAME
@@ -23,8 +23,8 @@ aws s3 cp ${BACKUP_NAME}.tar.bz2.nc $S3_BACKUP_PATH \
     --region=fr-par
 
 # upload the database as latest
-cp ${BACKUP_NAME}.tar.bz2.nc ${DATABASE_NAME}_db_latest.tar.bz2.nc
+cp ${BACKUP_NAME}.tar.bz2.nc ${DATABASE_NAME}_DB_latest.tar.bz2.nc
 
-aws s3 cp ${DATABASE_NAME}_db_latest.tar.bz2.nc $S3_BACKUP_PATH \
+aws s3 cp ${DATABASE_NAME}_DB_latest.tar.bz2.nc $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
     --region=fr-par
