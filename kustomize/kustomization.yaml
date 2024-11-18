@@ -12,11 +12,7 @@ resources:
   # clickhouse
   - backup-plausible-clickhouse.yaml
 
-  # postgres 11 wating to be "upgraded"
-  - backup-plausible.yaml
-
   # postgres 15
-
   - backup-cnvos-acf.yaml
   - backup-cnvos.yaml
   - backup-consul-koper.yaml
@@ -53,6 +49,7 @@ resources:
   - backup-parladata-ua.yaml
   - backup-parlameter-trbovlje.yaml
   - backup-penpot.yaml
+  - backup-plausible.yaml
   - backup-podpri.yaml
   - backup-ppp-hr.yaml
   - backup-ppp.yaml
