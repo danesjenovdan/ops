@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set backup file name
-export DUMP_FILE='/tmp/'${DATABASE_NAME}_DB_`date +%Y%m%d`.sql
+export DUMP_FILE='/tmp/'${DATABASE_NAME}_DB_`date +%Y-%m-%d`.sql
 
 echo "[mysqldump]" > /tmp/.my.cnf
 echo 'user='$DATABASE_USER >> /tmp/.my.cnf
