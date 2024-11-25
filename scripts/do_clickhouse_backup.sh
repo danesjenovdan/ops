@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set backup name
-export BACKUP_NAME=${DATABASE_NAME}_clickhouse_DB_`date +%Y%m%d`
+export BACKUP_NAME=${DATABASE_NAME}_clickhouse_DB_`date +%Y-%m-%d`
 
 # create backup dir
 mkdir $BACKUP_NAME
