@@ -1,6 +1,13 @@
 FROM clickhouse/clickhouse-server:24.9.2
 RUN apt-get update -y
-RUN apt-get install -y python3 python3-pip age wget
+RUN apt-get install -y python3 python3-pip wget
+
+# age install
+RUN wget -q https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+RUN go install filippo.io/age/cmd/...@latest
+ENV PATH=$PATH:/root/go/bin
 
 # aws cli install and setup
 RUN pip3 install awscli
