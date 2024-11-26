@@ -15,9 +15,16 @@ mysqldump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
 bzip2 $DUMP_FILE
 
 # encrypt the database
-mcrypt ${DUMP_FILE}.bz2 -k $DB_BACKUP_PASSWORD
+age -r $AGE_RECIPIENT ${DUMP_FILE}.bz2 > ${DUMP_FILE}.bz2.age
 
 # upload the database to s3
-aws s3 cp ${DUMP_FILE}.bz2.nc $S3_BACKUP_PATH \
+aws s3 cp ${DUMP_FILE}.bz2.age $S3_BACKUP_PATH \
+    --endpoint-url=https://s3.fr-par.scw.cloud \
+    --region=fr-par
+
+# upload the database as latest
+cp ${DUMP_FILE}.bz2.age ${DATABASE_NAME}_DB_latest.bz2.age
+
+aws s3 cp ${DATABASE_NAME}_DB_latest.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
     --region=fr-par

@@ -14,7 +14,7 @@ RUN echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ stretch-pgdg mai
 RUN apt-get update
 # END HACK
 
-RUN apt-get update && apt-get install -y python3 python3-pip mcrypt
+RUN apt-get update && apt-get install -y python3 python3-pip age
 
 # aws cli install and setup
 RUN pip3 install awscli
