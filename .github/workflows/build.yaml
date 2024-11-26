@@ -21,16 +21,6 @@ jobs:
           username: nologin
           password: ${{ secrets.SCW_SECRET_TOKEN }}
 
-      - name: Build and push backup
-        uses: docker/build-push-action@v3
-        with:
-          file: dockerfiles/backup.Dockerfile
-          context: .
-          push: true
-          tags: |
-            rg.fr-par.scw.cloud/djnd/backup:${{ github.sha }}
-            rg.fr-par.scw.cloud/djnd/backup:latest
-
       - name: Build and push postgis backup
         uses: docker/build-push-action@v3
         with:
