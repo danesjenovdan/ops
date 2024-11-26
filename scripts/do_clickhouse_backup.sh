@@ -15,16 +15,16 @@ cd ..
 tar cjvf ${BACKUP_NAME}.tar.bz2 ./${BACKUP_NAME}
 
 # # encrypt the database
-mcrypt ${BACKUP_NAME}.tar.bz2 -k $DB_BACKUP_PASSWORD
+age -r $AGE_RECIPIENT ${BACKUP_NAME}.tar.bz2 > ${BACKUP_NAME}.tar.bz2.age
 
 # upload the database to s3
-aws s3 cp ${BACKUP_NAME}.tar.bz2.nc $S3_BACKUP_PATH \
+aws s3 cp ${BACKUP_NAME}.tar.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
     --region=fr-par
 
 # upload the database as latest
-cp ${BACKUP_NAME}.tar.bz2.nc ${DATABASE_NAME}_DB_latest.tar.bz2.nc
+cp ${BACKUP_NAME}.tar.bz2.age ${DATABASE_NAME}_clickhouse_DB_latest.tar.bz2.age
 
-aws s3 cp ${DATABASE_NAME}_DB_latest.tar.bz2.nc $S3_BACKUP_PATH \
+aws s3 cp ${DATABASE_NAME}_clickhouse_DB_latest.tar.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
     --region=fr-par

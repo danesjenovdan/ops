@@ -1,7 +1,7 @@
 FROM bitnami/mariadb:10.6-debian-10
 USER root
 RUN apt-get update -y
-RUN apt-get install -y python3 python3-pip mcrypt
+RUN apt-get install -y python3 python3-pip age
 
 # aws cli install and setup
 RUN pip3 install awscli

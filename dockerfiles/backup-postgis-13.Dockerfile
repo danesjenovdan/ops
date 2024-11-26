@@ -1,6 +1,6 @@
 FROM postgis/postgis:13-master
 RUN apt update -y
-RUN apt install -y python3 python3-pip mcrypt
+RUN apt install -y python3 python3-pip age
 
 # aws cli install and setup
 RUN pip3 install awscli

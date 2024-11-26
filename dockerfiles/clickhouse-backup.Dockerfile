@@ -1,6 +1,6 @@
 FROM clickhouse/clickhouse-server:24.9.2
 RUN apt-get update -y
-RUN apt-get install -y python3 python3-pip mcrypt wget
+RUN apt-get install -y python3 python3-pip age wget
 
 # aws cli install and setup
 RUN pip3 install awscli
