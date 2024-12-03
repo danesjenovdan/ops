@@ -78,4 +78,7 @@ images:
     newTag: '89dc5c1e30d55ee32ba1416a0893e971c365f356'
   - name: backup-pg-15
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
-    newTag: '89dc5c1e30d55ee32ba1416a0893e971c365f356'
+    newTag: 'f2c80a76aac2a09975fb86949cd7bf99777a65d1'
+  - name: backups-cleaner
+    newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
+    newTag: 'latest'
