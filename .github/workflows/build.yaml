@@ -70,3 +70,13 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backup-pg-15:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backup-pg-15:latest
+
+      - name: Build and push backups-cleaner
+        uses: docker/build-push-action@v3
+        with:
+          file: dockerfiles/backups-cleaner.Dockerfile
+          context: .
+          push: true
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backups-cleaner:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backups-cleaner:latest

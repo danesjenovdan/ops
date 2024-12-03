@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backups-cleaner
+spec:
+  schedule: 6 55 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backups-cleaner
+            image: backups-cleaner
+            args:
+            - python
+            - backups.py
+            - clean-s3-backups
+            - --force
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-pg-15
+          restartPolicy: OnFailure
