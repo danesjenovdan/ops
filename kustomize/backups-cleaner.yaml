@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: backups-cleaner
 spec:
-  schedule: 6 55 * * *
+  schedule: 55 23 * * *
   jobTemplate:
     spec:
       template:
