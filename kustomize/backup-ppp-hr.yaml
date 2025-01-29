@@ -19,7 +19,7 @@ spec:
                   name: secrets-backup-pg-15
             env:
               - name: DATABASE_NAME
-                value: ppp-hr
+                value: ppp_hr
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure
