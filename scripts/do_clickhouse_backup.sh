@@ -30,4 +30,5 @@ cp ${BACKUP_NAME}.tar.bz2.age ${DATABASE_NAME}_clickhouse_DB_latest.tar.bz2.age
 
 awsv2 s3 cp ${DATABASE_NAME}_clickhouse_DB_latest.tar.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
-    --region=fr-par
+    --region=fr-par \
+    --checksum-algorithm=CRC32
