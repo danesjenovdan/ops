@@ -29,4 +29,5 @@ cp ${DUMP_FILE}.bz2.age ${DATABASE_NAME}_DB_latest.bz2.age
 
 awsv2 s3 cp ${DATABASE_NAME}_DB_latest.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
-    --region=fr-par
+    --region=fr-par \
+    --checksum-algorithm=CRC32
