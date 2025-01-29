@@ -4,7 +4,7 @@ RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip age
 
 # aws cli install and setup
-RUN pip3 install awscliv2==2.22.35 --break-system-packages
+RUN pip3 install awscliv2==2.2.0 --break-system-packages
 
 RUN awsv2 --install
 COPY config/aws.config $HOME/.aws/config
