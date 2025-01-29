@@ -23,7 +23,8 @@ awsv2 --configure default ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
 # upload the database to s3
 awsv2 s3 cp ${BACKUP_NAME}.tar.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
-    --region=fr-par
+    --region=fr-par \
+    --checksum-algorithm=CRC32
 
 # upload the database as latest
 cp ${BACKUP_NAME}.tar.bz2.age ${DATABASE_NAME}_clickhouse_DB_latest.tar.bz2.age
