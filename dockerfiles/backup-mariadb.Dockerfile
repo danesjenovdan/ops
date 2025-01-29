@@ -4,9 +4,9 @@ RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip age
 
 # aws cli install and setup
-RUN pip3 install awscli --break-system-packages
-RUN pip3 install awscli-plugin-endpoint --break-system-packages
-RUN aws configure set plugins.endpoint awscli_plugin_endpoint
+RUN pip3 install awscliv2 --break-system-packages
+
+RUN awsv2 --install
 COPY config/aws.config $HOME/.aws/config
 
 # copy backup script
