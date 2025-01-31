@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-mautic-media
+spec:
+  schedule: 39 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-mautic-media
+            image: backup-static-files
+            args:
+            - /bin/bash
+            - /static_folder_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-mautic-backup
+            env:
+              - name: PROJECT_NAME
+                value: mautic
+              - name: MEDIA_PATH
+                value: /var/www/html/docroot/media
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          volumeMounts:
+            - mountPath: /var/www/html/docroot/media
+              name: mautic-5-static
+              subPath: media
+          restartPolicy: OnFailure
+      volumes:
+        - name: mautic-5-static
+          persistentVolumeClaim:
+            claimName: mautic-5-volumeclaim
