@@ -11,9 +11,11 @@ spec:
           containers:
           - name: backup-mautic-media
             image: backup-static-files
-            args:
-            - /bin/bash
-            - /static_folder_backup.sh
+            # args:
+            # - /bin/bash
+            # - /static_folder_backup.sh
+            command: [ "sleep" ]
+            args: [ "infinity" ]
             envFrom:
               - secretRef:
                   name: secrets-mautic-backup
