@@ -72,19 +72,19 @@ resources:
 images:
   - name: backup-mb
     newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
   - name: backup-pg-15
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
   - name: backup-static-files
     newName: rg.fr-par.scw.cloud/djnd/backup-static-files
-    newTag: '8ac7808c225bc1701d940127671192feb0634fd2'
+    newTag: 'd204d5b6250d9cb48fa74b817ed54aee14a9574d'
