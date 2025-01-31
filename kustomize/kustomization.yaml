@@ -4,65 +4,67 @@ namespace: backup
 resources:
   
   # postgis
-  - backup-izboljsajmo-maribor.yaml
+  - backups/db/backup-izboljsajmo-maribor.yaml
 
   # mariadb
-  - backup-mautic.yaml
+  - backups/db/backup-mautic.yaml
 
   # clickhouse
-  - backup-plausible-clickhouse.yaml
+  - backups/db/backup-plausible-clickhouse.yaml
 
   # postgres 15
-  - backup-cnvos-acf.yaml
-  - backup-cnvos.yaml
-  - backup-consul-koper.yaml
-  - backup-consul-maribor.yaml
-  - backup-consul-medvode.yaml
-  - backup-consul-nova-gorica.yaml
-  - backup-consul-novo-mesto.yaml
-  - backup-consul-rog.yaml
-  - backup-consul-staging.yaml
-  - backup-consul-trebnje.yaml
-  - backup-consul-trzic.yaml
-  - backup-danesjenovdan-si.yaml
-  - backup-disco.yaml
-  - backup-dobrodelen.yaml
-  - backup-glasljudstva.yaml
-  - backup-hudapobuda.yaml
-  - backup-izvoli-eu.yaml
-  - backup-lesson-plans.yaml
-  - backup-melita.yaml
-  - backup-najemniski-sos.yaml
+  - backups/db/backup-cnvos-acf.yaml
+  - backups/db/backup-cnvos.yaml
+  - backups/db/backup-consul-koper.yaml
+  - backups/db/backup-consul-maribor.yaml
+  - backups/db/backup-consul-medvode.yaml
+  - backups/db/backup-consul-nova-gorica.yaml
+  - backups/db/backup-consul-novo-mesto.yaml
+  - backups/db/backup-consul-rog.yaml
+  - backups/db/backup-consul-staging.yaml
+  - backups/db/backup-consul-trebnje.yaml
+  - backups/db/backup-consul-trzic.yaml
+  - backups/db/backup-danesjenovdan-si.yaml
+  - backups/db/backup-disco.yaml
+  - backups/db/backup-dobrodelen.yaml
+  - backups/db/backup-glasljudstva.yaml
+  - backups/db/backup-hudapobuda.yaml
+  - backups/db/backup-izvoli-eu.yaml
+  - backups/db/backup-lesson-plans.yaml
+  - backups/db/backup-melita.yaml
+  - backups/db/backup-najemniski-sos.yaml
   # - backup-newsgradient.yaml archived
-  - backup-novdan.yaml
-  - backup-obljubadeladolg.yaml
-  - backup-odprti-racuni-obcine.yaml
-  - backup-odprti-racuni.yaml
-  - backup-parladata-ajdovscina.yaml
-  - backup-parladata-bosna.yaml
-  - backup-parladata-hrastnik.yaml
-  - backup-parladata-hrvaska.yaml
-  - backup-parladata-lendava.yaml
-  - backup-parladata-ljubljana.yaml
-  - backup-parladata-medvode.yaml
-  - backup-parladata-slovenija.yaml
-  - backup-parladata-ua.yaml
-  - backup-parlameter-trbovlje.yaml
-  - backup-penpot.yaml
-  - backup-plausible.yaml
-  - backup-podpri.yaml
-  - backup-ppp-hr.yaml
-  - backup-ppp.yaml
-  - backup-pravnamreza.yaml
-  - backup-rog-stage.yaml
-  - backup-rog.yaml
-  - backup-stanovanjske-zadruge-zemljevid.yaml
-  - backup-twito.yaml
-  - backup-vinopolis.yaml
-  - backup-weblate.yaml
-  - backup-wiki-outline.yaml
-  - backups-cleaner.yaml
-  
+  - backups/db/backup-novdan.yaml
+  - backups/db/backup-obljubadeladolg.yaml
+  - backups/db/backup-odprti-racuni-obcine.yaml
+  - backups/db/backup-odprti-racuni.yaml
+  - backups/db/backup-parladata-ajdovscina.yaml
+  - backups/db/backup-parladata-bosna.yaml
+  - backups/db/backup-parladata-hrastnik.yaml
+  - backups/db/backup-parladata-hrvaska.yaml
+  - backups/db/backup-parladata-lendava.yaml
+  - backups/db/backup-parladata-ljubljana.yaml
+  - backups/db/backup-parladata-medvode.yaml
+  - backups/db/backup-parladata-slovenija.yaml
+  - backups/db/backup-parladata-ua.yaml
+  - backups/db/backup-parlameter-trbovlje.yaml
+  - backups/db/backup-penpot.yaml
+  - backups/db/backup-plausible.yaml
+  - backups/db/backup-podpri.yaml
+  - backups/db/backup-ppp-hr.yaml
+  - backups/db/backup-ppp.yaml
+  - backups/db/backup-pravnamreza.yaml
+  - backups/db/backup-rog-stage.yaml
+  - backups/db/backup-rog.yaml
+  - backups/db/backup-stanovanjske-zadruge-zemljevid.yaml
+  - backups/db/backup-twito.yaml
+  - backups/db/backup-vinopolis.yaml
+  - backups/db/backup-weblate.yaml
+  - backups/db/backup-wiki-outline.yaml
+  - backups/db/backups-cleaner.yaml
+
+  # static files
+  - backups/static/backup-mautic.yaml
 
   #TODO
   # consul_hrpelje_kozina
@@ -83,3 +85,6 @@ images:
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
     newTag: '2e030d0c202c6c2e49a03d80595050f01996f5fc'
+  - name: backup-static-files
+    newName: rg.fr-par.scw.cloud/djnd/backup-static-files
+    newTag: 'latest'
