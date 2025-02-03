@@ -85,6 +85,4 @@ images:
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
     newTag: '6b697229a698e4c9a50a08230604d69a0bc2bb21'
-  - name: backup-static-files
-    newName: rg.fr-par.scw.cloud/djnd/backup-static-files
-    newTag: '6b697229a698e4c9a50a08230604d69a0bc2bb21'
+
