@@ -106,7 +106,7 @@ def delete_stale_backups(
     files_to_delete = [
         file_name
         for file_name in project_backup_files
-        if file_name.split("_DB_")[-1] in date_strings_for_deletion
+        if file_name.split("_DB_")[-1].split(".")[0] in date_strings_for_deletion
         and "latest" not in file_name
     ]
 
