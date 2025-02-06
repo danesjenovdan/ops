@@ -9,7 +9,7 @@ RUN chmod +x /usr/local/bin/age
 
 
 # aws cli install and setup
-RUN pip3 install awscliv2==2.2.0
+RUN pip3 install awscliv2==2.3.1
 
 RUN awsv2 --install
 COPY config/aws.config $HOME/.aws/config
