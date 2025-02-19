@@ -48,6 +48,7 @@ resources:
   - backups/db/backup-parladata-slovenija.yaml
   - backups/db/backup-parladata-ua.yaml
   - backups/db/backup-parlameter-trbovlje.yaml
+  - backups/db/backup-parlameter-zagreb.yaml
   - backups/db/backup-penpot.yaml
   - backups/db/backup-plausible.yaml
   - backups/db/backup-podpri.yaml
