@@ -1,25 +1,25 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: backup-mautic
+  name: backup-parladata-zagreb
 spec:
-  schedule: 39 2 * * *
+  schedule: 49 2 * * *
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: backup-mautic
-            image: backup-mariadb
+          - name: backup-parladata-zagreb
+            image: backup-pg-15
             args:
             - /bin/bash
-            - /do_mariadb_backup.sh
+            - /do_backup.sh
             envFrom:
               - secretRef:
-                  name: secrets-mautic-backup
+                  name: secrets-backup-pg-15
             env:
               - name: DATABASE_NAME
-                value: mautic_5
+                value: parlameter_zagreb
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure
