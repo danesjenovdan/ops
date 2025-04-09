@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-consul-ankaran
+spec:
+  schedule: 19 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: consul-ankaran
+            image: backup-pg-15
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-pg-15
+            env:
+              - name: DATABASE_NAME
+                value: consul_ankaran
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure
