@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime-kuma
+  namespace: shared
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uptime-kuma
+  template:
+    metadata:
+      labels:
+        app: uptime-kuma
+    spec:
+      volumes:
+        - name: uptime-kuma-persistent-storage
+          persistentVolumeClaim:
+            claimName: uptime-kuma-pvc
+      containers:
+        - name: uptime-kuma
+          image: uptime-kuma
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: uptime-kuma-persistent-storage
+              mountPath: /app/data
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext: {}
+      restartPolicy: Always
