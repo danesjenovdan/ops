@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: backup
 resources:
-  
+
   # postgis
   - backups/db/backup-izboljsajmo-maribor.yaml
 
@@ -32,6 +32,8 @@ resources:
   - backups/db/backup-glasljudstva.yaml
   - backups/db/backup-hudapobuda.yaml
   - backups/db/backup-izvoli-eu.yaml
+  - backups/db/backup-krtk.yaml
+  - backups/db/backup-kvak.yaml
   - backups/db/backup-lesson-plans.yaml
   - backups/db/backup-melita.yaml
   - backups/db/backup-najemniski-sos.yaml
@@ -64,6 +66,7 @@ resources:
   - backups/db/backup-vinopolis.yaml
   - backups/db/backup-weblate.yaml
   - backups/db/backup-wiki-outline.yaml
+  - backups/db/backup-zip.yaml
   - backups/db/backups-cleaner.yaml
 
   # static files
@@ -88,4 +91,3 @@ images:
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
     newTag: '41dac831d6f0ebf4e6b0b1bb958965252e27d25a'
-
