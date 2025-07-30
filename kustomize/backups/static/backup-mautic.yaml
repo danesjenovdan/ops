@@ -1,0 +1,60 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-mautic
+spec:
+  schedule: "*/15 * * * *" # Zaženi vsakih 15 minut
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - mautic-5
+          containers:
+          - name: backup-mautic-static
+            image: backup-static-files
+            args:
+            - /bin/bash
+            - /static_folder_print_files.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-mautic-backup
+            env:
+            - name: SOURCE_BASE_DIR
+              value: "/usr/usr/share" #"/var/www/html" # Glavna pot, kjer so podmape
+            - name: SUB_DIRS_TO_BACKUP
+              value: "nginx/html" #"docroot/media,var/logs,config"
+            - name: PROJECT
+              value: "mautic" # Ime projekta za poimenovanje datotek
+            - name: BACKUP_DIR
+              value: "/tmp/backups" # Lahko se izpusti, če pustiš privzeto vrednost v skripti
+            - name: S3_BACKUP_PATH
+              value: s3://djnd-backups
+            - name: S3_ENDPOINT_URL
+              value: "https://s3.fr-par.scw.cloud"
+            - name: S3_REGION
+              value: "fr-par"
+
+          # This is just for test backup
+            volumeMounts:
+            - name: test-velero-storage
+              mountPath: "/usr/share/nginx/html" # To mora biti isto kot SOURCE_BASE_DIR
+          volumes:
+          - name: test-velero-storage
+            persistentVolumeClaim:
+              claimName: test-velero-pvc # mautic-5-static
+
+          #   volumeMounts:
+          #   - name: mautic-5-static-volume
+          #     mountPath: "/var/www/html" # To mora biti isto kot SOURCE_BASE_DIR
+          # volumes:
+          # - name: mautic-5-static-volume
+          #   persistentVolumeClaim:
+          #     claimName: test-velero # mautic-5-static

@@ -80,3 +80,13 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backups-cleaner:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backups-cleaner:latest
+      
+      - name: Build and push backup-static-files
+        uses: docker/build-push-action@v3
+        with:
+          file: dockerfiles/backup-static-files.Dockerfile
+          context: .
+          push: true
+          tags: |
+            rg.fr-par.scw.cloud/djnd/backup-static-files:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup-static-files:latest
