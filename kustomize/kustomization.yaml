@@ -70,7 +70,7 @@ resources:
   - backups/db/backups-cleaner.yaml
 
   # static files
-  # - backups/static/backup-mautic.yaml
+  - backups/static/backup-mautic.yaml
 
   #TODO
   # consul_hrpelje_kozina
