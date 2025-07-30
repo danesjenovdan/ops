@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: backup-mautic
+  name: backup-mautic-static
 spec:
   schedule: "*/15 * * * *" # Zaženi vsakih 15 minut
   jobTemplate:
