@@ -4,7 +4,7 @@ namespace: backup
 resources:
 
   # postgis
-  - backups/db/backup-izboljsajmo-maribor.yaml
+  # - backups/db/backup-izboljsajmo-maribor.yaml # NO LONGER DEPLOYED
 
   # mariadb
   - backups/db/backup-mautic.yaml
@@ -18,7 +18,7 @@ resources:
   - backups/db/backup-consul-ankaran.yaml
   - backups/db/backup-consul-celje.yaml
   - backups/db/backup-consul-koper.yaml
-  - backups/db/backup-consul-maribor.yaml
+  # - backups/db/backup-consul-maribor.yaml # NO LONGER DEPLOYED
   - backups/db/backup-consul-medvode.yaml
   - backups/db/backup-consul-nova-gorica.yaml
   - backups/db/backup-consul-novo-mesto.yaml
