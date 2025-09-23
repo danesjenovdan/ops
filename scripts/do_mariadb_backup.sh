@@ -3,13 +3,13 @@
 # set backup file name
 export DUMP_FILE='/tmp/'${DATABASE_NAME}_DB_`date +%Y-%m-%d`.sql
 
-echo "[mysqldump]" > /tmp/.my.cnf
+echo "[mariadb-dump]" > /tmp/.my.cnf
 echo 'user='$DATABASE_USER >> /tmp/.my.cnf
 echo 'password='$DATABASE_PASSWORD >> /tmp/.my.cnf
 echo 'host='$DATABASE_HOST >> /tmp/.my.cnf
 echo 'port=3306' >> /tmp/.my.cnf
 
-mysqldump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
+mariadb-dump --defaults-extra-file=/tmp/.my.cnf $DATABASE_NAME > $DUMP_FILE
 
 # zip the database
 bzip2 $DUMP_FILE
