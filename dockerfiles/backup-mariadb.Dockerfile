@@ -1,4 +1,4 @@
-FROM bitnami/mariadb:10.6-debian-12
+FROM mariadb:12.0.2
 USER root
 RUN apt-get update -y
 RUN apt-get install -y python3 python3-pip age
