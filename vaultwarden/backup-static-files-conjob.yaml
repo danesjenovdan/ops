@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-vaultwarden-static
+  namespace: vaultwarden
+spec:
+  schedule: "15 1 * * *" # Zaženi vsak dan ob 1:15
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                    - vaultwarden
+                topologyKey: "kubernetes.io/hostname"
+          containers:
+            - name: backup-vaultwarden-static
+              image: rg.fr-par.scw.cloud/djnd/backup-static-files:latest
+              args:
+              - /bin/bash
+              - /static_folder_backup.sh
+              envFrom:
+                - secretRef:
+                    name: static-backup # secrets-mautic-backup
+              env:
+                - name: SOURCE_BASE_DIR
+                  value: "/" #"/var/www/html" # Glavna pot, kjer so podmape
+                - name: SUB_DIRS_TO_BACKUP
+                  value: "data" #"docroot/media,var/logs,config"
+                - name: PROJECT
+                  value: "vaultwarden" # Ime projekta za poimenovanje datotek
+                - name: BACKUP_DIR
+                  value: "/tmp/backups" # Lahko se izpusti, če pustiš privzeto vrednost v skripti
+                - name: S3_BACKUP_PATH
+                  value: s3://djnd-backup-static
+                - name: S3_ENDPOINT_URL
+                  value: "https://s3.fr-par.scw.cloud"
+                - name: S3_REGION
+                  value: "fr-par"
+              volumeMounts:
+                - name: vaultwarden-storage
+                  mountPath: /data
+                - name: vaultwarden-attachments
+                  mountPath: /data/attachments
+          volumes:
+            - name: vaultwarden-storage
+              persistentVolumeClaim:
+                claimName: vaultwarden-data-vaultwarden-1737361196-0
+            - name: vaultwarden-attachments
+              persistentVolumeClaim:
+                claimName: vaultwarden-attachments-vaultwarden-1737361196-0
+          restartPolicy: Never
