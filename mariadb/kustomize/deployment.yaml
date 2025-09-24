@@ -9,6 +9,8 @@ spec:
   selector:
     matchLabels:
       app: mariadb-djnd
+  strategy:
+    type: Recreate # mariadb needs an exclusive lock, Recreate kills the old pod before starting a new one
   template:
     metadata:
       labels:
