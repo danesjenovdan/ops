@@ -3,7 +3,7 @@ FROM postgis/postgis:16-3.5
 USER root
 ENV HOME=/root
 RUN apt update -y
-RUN apt install -y age unzip curl \
+RUN apt install -y age unzip tar bzip2 curl \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
