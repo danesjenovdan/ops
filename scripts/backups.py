@@ -18,15 +18,15 @@ def get_all_files(
     return backups_bucket.objects.all()
 
 
-def get_project_name_from_file_name(file_name: str) -> str:
+def get_project_name_from_file_name(file_name: str, backup_type: str = "DB",) -> str:
     # this if is to filter out other files
-    if "_DB_" in file_name and "/" not in file_name:
-        return file_name.split("_DB_")[0]
+    if f"_{backup_type}_" in file_name and "/" not in file_name:
+        return file_name.split(f"_{backup_type}_")[0]
 
     raise NotImplementedError(f"Can not find project name from {file_name}")
 
 
-def get_all_projects(s3=s3_from_config, bucket_name="djnd-backups") -> List[str]:
+def get_all_projects(s3=s3_from_config, bucket_name="djnd-backups", backup_type="DB") -> List[str]:
     all_files = get_all_files(s3, bucket_name)
     project_names = set()
     for s3_object in all_files:
@@ -35,7 +35,7 @@ def get_all_projects(s3=s3_from_config, bucket_name="djnd-backups") -> List[str]
             and "parlamint-before-server-delete" not in s3_object.key
             and "latest" not in s3_object.key
         ):
-            project_names.add(get_project_name_from_file_name(s3_object.key))
+            project_names.add(get_project_name_from_file_name(s3_object.key, backup_type))
     return list(project_names)
 
 
@@ -77,6 +77,7 @@ def delete_stale_backups(
     s3=s3_from_config,
     bucket_name: str = "djnd-backups",
     project_name: str = "hudapobuda",
+    backup_type: str = "DB",
     cutoff_date: date | None = None,
     force: bool = False,
 ) -> None:
@@ -106,7 +107,7 @@ def delete_stale_backups(
     files_to_delete = [
         file_name
         for file_name in project_backup_files
-        if file_name.split("_DB_")[-1].split(".")[0] in date_strings_for_deletion
+        if file_name.split(f"_{backup_type}_")[-1].split(".")[0] in date_strings_for_deletion
         and "latest" not in file_name
     ]
 
@@ -156,7 +157,7 @@ def cli() -> None:
     "--force", is_flag=True, required=False, type=bool, show_default=True, default=False
 )
 def clean_s3_backups(force: bool) -> None:
-    # iterate through all the projects and delete stale backups for each of them
+    # iterate through all the projects and delete stale database backups for each of them
     for project_name in get_all_projects(
         s3=s3_from_config,
         bucket_name="djnd-backups",
@@ -164,6 +165,20 @@ def clean_s3_backups(force: bool) -> None:
         delete_stale_backups(
             s3=s3_from_config,
             bucket_name="djnd-backups",
+            project_name=project_name,
+            force=force,
+        )
+
+    # iterate through all the projects and delete stale static backups for each of them
+    for project_name in get_all_projects(
+        s3=s3_from_config,
+        bucket_name="djnd-backup-static",
+        backup_type="STATIC",
+    ):
+        delete_stale_backups(
+            s3=s3_from_config,
+            bucket_name="djnd-backup-static",
+            backup_type="STATIC",
             project_name=project_name,
             force=force,
         )
