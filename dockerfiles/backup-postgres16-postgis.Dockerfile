@@ -1,6 +1,7 @@
 
 FROM postgis/postgis:16-3.5
 USER root
+ENV HOME=/root
 RUN apt update -y
 RUN apt install -y python3 python3-pip age
 
