@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memcached-djnd
+  namespace: shared
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memcached-djnd
+  template:
+    metadata:
+      labels:
+        app: memcached-djnd
+    spec:
+      volumes:
+        - name: sasl-config
+          configMap:
+            name: memcached-sasl-config
+        - name: sasl-db
+          emptyDir: {}
+        - name: memcached-secret
+          secret:
+            secretName: memcached-auth
+      initContainers:
+        - name: sasl-init
+          image: debian:bullseye-slim
+          envFrom:
+            - secretRef:
+                name: memcached-auth
+          command:
+            - sh
+            - -c
+            - |
+              apt-get update && \
+              apt-get install -y sasl2-bin libsasl2-modules && \
+              echo "$PASSWORD" | saslpasswd2 -p -c -f /etc/sasl2/memcached-sasldb2 "$USERNAME" && \
+              chown 11211:11211 /etc/sasl2/memcached-sasldb2
+
+          volumeMounts:
+            - name: sasl-db
+              mountPath: /etc/sasl2
+            - name: memcached-secret
+              mountPath: /memcached-secret
+      containers:
+        - name: memcached-djnd
+          image: memcached
+          args: ["-S", "-vv", "-m", "2048"]
+          env:
+            - name: MEMCACHED_TLS_PORT
+              value: "11211"
+            - name: LOGFILE
+              value: "/var/log/memcached.log"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 2Gi
+            limits:
+              cpu: 500m
+              memory: 3Gi
+          volumeMounts:
+            - name: sasl-config
+              mountPath: /etc/sasl2/memcached.conf
+              subPath: memcached.conf
+            - name: sasl-db
+              mountPath: /etc/sasl2
+          imagePullPolicy: IfNotPresent
+          securityContext: {}
+      restartPolicy: Always

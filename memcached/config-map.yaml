@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: memcached-sasl-config
+data:
+  memcached.conf: |
+    mech_list: plain
+    sasldb_path: /etc/sasl2/memcached-sasldb2

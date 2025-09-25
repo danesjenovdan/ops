@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-djnd
+  labels:
+    app: postgresql-djnd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-djnd
+  template:
+    metadata:
+      labels:
+        app: postgresql-djnd
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - postgresql-djnd
+              topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: postgresql-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgresql-djnd-pvc
+      containers:
+        - name: postgresql-djnd
+          image: postgis
+          volumeMounts:
+            - name: postgresql-persistent-storage
+              mountPath: /var/lib/postgresql/data
+              subPath: pgdata
+          envFrom:
+            - secretRef:
+                name: postgresql-auth
+          ports:
+            - containerPort: 5432
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 10
+            periodSeconds: 11
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 30
+            periodSeconds: 21
