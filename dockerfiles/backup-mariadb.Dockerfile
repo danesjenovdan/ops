@@ -1,12 +1,14 @@
 FROM mariadb:12.0.2
 USER root
 RUN apt-get update -y
-RUN apt-get install -y python3 python3-pip age
+RUN apt-get install -y age unzip curl \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && rm -rf awscliv2.zip aws
 
-# aws cli install and setup
-RUN pip3 install awscliv2==2.3.1 --break-system-packages
-
-RUN awsv2 --install
+# setup aws config
+RUN mkdir -p /root/.aws
 COPY config/aws.config $HOME/.aws/config
 
 # copy backup script

@@ -16,9 +16,6 @@ bzip2 $DUMP_FILE
 # encrypt the database
 age -r $AGE_RECIPIENT ${DUMP_FILE}.bz2 > ${DUMP_FILE}.bz2.age
 
-# configure aws - set access key and secret key
-#aws --configure default ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
-
 # upload the database to s3
 aws s3 cp ${DUMP_FILE}.bz2.age $S3_BACKUP_PATH \
     --endpoint-url=https://s3.fr-par.scw.cloud \
