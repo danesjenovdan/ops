@@ -84,8 +84,8 @@ images:
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
     newTag: 'd1cd9e166e885d0b9627eada7785dfdabf497261'
-  - name: backup-pg-15
-    newName: rg.fr-par.scw.cloud/djnd/backup-pg-15
+  - name: backup-pg-16
+    newName: rg.fr-par.scw.cloud/djnd/backup-pg-16
     newTag: 'd1cd9e166e885d0b9627eada7785dfdabf497261'
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
