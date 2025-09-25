@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: shared
+resources:
+  - config-map.yaml
+  - deployment.yaml
+  - service.yaml
+images:
+  - name: memcached
+    newName: memcached
+    newTag: "1.6.39-alpine"

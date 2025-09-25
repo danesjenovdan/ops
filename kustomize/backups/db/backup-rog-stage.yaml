@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: rog-stage
-            image: backup-pg-15
+            image: backup-pg-16
             args:
             - /bin/bash
             - /do_backup.sh

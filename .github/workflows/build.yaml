@@ -61,15 +61,15 @@ jobs:
           add: '.'
           message: 'Update image versions in kustomize/kustomization.yaml'
 
-      - name: Build and push backup-pg-15
+      - name: Build and push backup-pg-16
         uses: docker/build-push-action@v3
         with:
-          file: dockerfiles/backup-postgres-15.Dockerfile
+          file: dockerfiles/backup-postgres16-postgis.Dockerfile
           context: .
           push: true
           tags: |
-            rg.fr-par.scw.cloud/djnd/backup-pg-15:${{ github.sha }}
-            rg.fr-par.scw.cloud/djnd/backup-pg-15:latest
+            rg.fr-par.scw.cloud/djnd/backup-pg-16:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/backup-pg-16:latest
 
       - name: Build and push backups-cleaner
         uses: docker/build-push-action@v3

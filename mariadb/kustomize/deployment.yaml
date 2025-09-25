@@ -9,11 +9,25 @@ spec:
   selector:
     matchLabels:
       app: mariadb-djnd
+  strategy:
+    type: Recreate # mariadb needs an exclusive lock, Recreate kills the old pod before starting a new one
   template:
     metadata:
       labels:
         app: mariadb-djnd
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - mariadb-djnd
+                topologyKey: "kubernetes.io/hostname"
       volumes:
         - name: mariadb-persistent-storage
           persistentVolumeClaim:
