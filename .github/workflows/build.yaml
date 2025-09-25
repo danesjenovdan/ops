@@ -21,15 +21,15 @@ jobs:
           username: nologin
           password: ${{ secrets.SCW_SECRET_TOKEN }}
 
-      - name: Build and push postgis backup
-        uses: docker/build-push-action@v3
-        with:
-          file: dockerfiles/backup-postgis-13.Dockerfile
-          context: .
-          push: true
-          tags: |
-            rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
-            rg.fr-par.scw.cloud/djnd/backup-postgis-13:latest
+      # - name: Build and push postgis backup
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     file: dockerfiles/backup-postgis-13.Dockerfile
+      #     context: .
+      #     push: true
+      #     tags: |
+      #       rg.fr-par.scw.cloud/djnd/backup-postgis-13:${{ github.sha }}
+      #       rg.fr-par.scw.cloud/djnd/backup-postgis-13:latest
 
       - name: Build and push mariadb backup
         uses: docker/build-push-action@v3

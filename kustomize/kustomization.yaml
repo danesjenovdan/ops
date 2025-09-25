@@ -75,9 +75,6 @@ resources:
   # consul_hrpelje_kozina
 
 images:
-  - name: backup-mb
-    newName: rg.fr-par.scw.cloud/djnd/backup-postgis-13
-    newTag: '94329f9a1a1c4b7d8bdf3b3adcca820ebd275e8c'
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
     newTag: '94329f9a1a1c4b7d8bdf3b3adcca820ebd275e8c'
