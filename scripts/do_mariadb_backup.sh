@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # set backup file name
 export DUMP_FILE='/tmp/'${DATABASE_NAME}_DB_`date +%Y-%m-%d`.sql

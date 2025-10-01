@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # set backup name
 export BACKUP_NAME=${DATABASE_NAME}_clickhouse_DB_`date +%Y-%m-%d`
