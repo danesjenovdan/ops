@@ -16,7 +16,9 @@ spec:
             - /do_mariadb_backup.sh
             envFrom:
               - secretRef:
-                  name: secrets-backup-mariadb
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-postgres
             env:
               - name: DATABASE_NAME
                 value: mautic_5

@@ -26,17 +26,20 @@ spec:
               args:
               - /bin/bash
               - /static_folder_backup.sh
+              envFrom:
+                - secretRef:
+                  name: secrets-backup-common
               env:
                 - name: SOURCE_BASE_DIR
                   value: "/usr/share" #"/var/www/html" # Glavna pot, kjer so podmape
                 - name: SUB_DIRS_TO_BACKUP
                   value: "nginx/html" #"docroot/media,var/logs,config"
                 - name: PROJECT
-                  value: "mautic" # Ime projekta za poimenovanje datotek
+                  value: "test-velero" # Ime projekta za poimenovanje datotek
                 - name: BACKUP_DIR
                   value: "/tmp/backups" # Lahko se izpusti, če pustiš privzeto vrednost v skripti
                 - name: S3_BACKUP_PATH
-                  value: s3://djnd-backups
+                  value: s3://djnd-backup-static
                 - name: S3_ENDPOINT_URL
                   value: "https://s3.fr-par.scw.cloud"
                 - name: S3_REGION
@@ -50,12 +53,4 @@ spec:
             - name: test-velero-storage
               persistentVolumeClaim:
                 claimName: test-velero-pvc # mautic-5-static
-
-          #   volumeMounts:
-          #   - name: mautic-5-static-volume
-          #     mountPath: "/var/www/html" # To mora biti isto kot SOURCE_BASE_DIR
-          # volumes:
-          # - name: mautic-5-static-volume
-          #   persistentVolumeClaim:
-          #     claimName: test-velero # mautic-5-static
-          restartPolicy: OnFailure
+          restartPolicy: Never

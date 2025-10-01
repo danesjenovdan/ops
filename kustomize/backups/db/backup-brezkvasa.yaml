@@ -16,6 +16,8 @@ spec:
             - /do_mariadb_backup.sh
             envFrom:
               - secretRef:
+                  name: secrets-backup-common
+              - secretRef:
                   name: secrets-backup-mariadb
             env:
               - name: DATABASE_NAME

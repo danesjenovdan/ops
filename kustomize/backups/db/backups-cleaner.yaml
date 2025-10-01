@@ -18,5 +18,7 @@ spec:
             - --force
             envFrom:
               - secretRef:
-                  name: secrets-backup-pg-15
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-postgres
           restartPolicy: OnFailure
