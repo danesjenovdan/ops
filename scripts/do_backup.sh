@@ -7,6 +7,7 @@ export DUMP_FILE=${DATABASE_NAME}_DB_`date +%Y-%m-%d`.pgdump
 # dump the database
 PGPASSWORD=$POSTGRES_PASSWORD \
     pg_dump -U $POSTGRES_USER \
+        -h $POSTGRES_HOST \
         -f $DUMP_FILE \
         -d \
         $DATABASE_NAME
