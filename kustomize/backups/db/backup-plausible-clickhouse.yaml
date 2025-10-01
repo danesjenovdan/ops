@@ -17,12 +17,10 @@ spec:
             - ./do_clickhouse_backup.sh
             envFrom:
               - secretRef:
-                  name: secrets-backup
+                  name: secrets-backup-common
               - secretRef:
-                  name: secrets-clickhouse-backup
+                  name: secrets-backup-clickhouse
             env:
-              - name: CLICKHOUSE_HOST
-                value: chi-clickhouse-simple-0-0.shared
               - name: DATABASE_NAME
                 value: plausible
               - name: S3_BACKUP_PATH

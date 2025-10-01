@@ -16,7 +16,9 @@ spec:
             - /do_backup.sh
             envFrom:
               - secretRef:
-                  name: secrets-backup-pg-15
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-postgres
             env:
               - name: DATABASE_NAME
                 value: odprti_racuni

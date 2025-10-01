@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 if [ -z "$SOURCE_BASE_DIR" ]; then
   echo "Napaka: SOURCE_BASE_DIR ni nastavljen (npr. /var/www/html)."
