@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-podpri-pic
+spec:
+  schedule: 49 4 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-podpri-pic
+            image: backup-pg-16
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-postgres
+            env:
+              - name: DATABASE_NAME
+                value: podpri-pic
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure
