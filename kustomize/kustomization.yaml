@@ -57,6 +57,7 @@ resources:
   - backups/db/backup-parlameter-zagreb.yaml
   - backups/db/backup-penpot.yaml
   - backups/db/backup-plausible.yaml
+  - backups/db/backup-podpri-pic.yaml
   - backups/db/backup-podpri.yaml
   - backups/db/backup-ppp-hr.yaml
   - backups/db/backup-ppp.yaml
