@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: odoo-bojkot
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - bojkot.si
+        - www.bojkot.si
+      secretName: bojkot-tls
+  rules:
+    - host: bojkot.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-bojkot
+                port:
+                  number: 8069
+    - host: www.bojkot.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-bojkot
+                port:
+                  number: 8069

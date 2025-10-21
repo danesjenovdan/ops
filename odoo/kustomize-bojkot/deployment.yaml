@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-bojkot
+  labels:
+    app: odoo-bojkot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo-bojkot
+  template:
+    metadata:
+      labels:
+        app: odoo-bojkot
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - odoo-bojkot
+              topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: odoo-bojkot-config
+          configMap:
+            name: odoo-bojkot-config
+        - name: odoo-filestore-bojkot-storage
+          persistentVolumeClaim:
+            claimName: odoo-filestore-bojkot-pvc
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: odoo-bojkot
+          image: odoo
+          envFrom:
+            - secretRef:
+                name: odoo-bojkot-secrets
+          volumeMounts:
+            - name: odoo-bojkot-config
+              mountPath: /etc/odoo/odoo.conf
+              subPath: odoo.conf
+            - name: odoo-filestore-bojkot-storage
+              mountPath: /var/lib/odoo/
+          args:
+            - "--db_user=$(DB_USER)"
+            - "--db_password=$(DB_PASSWORD)"
+            - "--smtp-user=$(SMTP_USER)"
+            - "--smtp-password=$(SMTP_PASSWORD)"
+          ports:
+            - containerPort: 8069

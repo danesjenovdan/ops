@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: odoo-stanovanjskiblok
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - stanovanjskiblok.si
+      secretName: stanovanjskiblok-tls
+  rules:
+    - host: stanovanjskiblok.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-stanovanjskiblok
+                port:
+                  number: 8069

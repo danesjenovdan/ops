@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: odoo-mirovniki
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - mirovniki.lb.djnd.si
+        - www.zamir.si
+        - zamir.si
+      secretName: mirovniki-tls
+  rules:
+    - host: mirovniki.lb.djnd.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-mirovniki
+                port:
+                  number: 8069
+    - host: www.zamir.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-mirovniki
+                port:
+                  number: 8069
+    - host: zamir.si
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: odoo-mirovniki
+                port:
+                  number: 8069
+
+

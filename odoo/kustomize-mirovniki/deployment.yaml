@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-mirovniki
+  labels:
+    app: odoo-mirovniki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo-mirovniki
+  template:
+    metadata:
+      labels:
+        app: odoo-mirovniki
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - odoo-mirovniki
+              topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: odoo-mirovniki-config
+          configMap:
+            name: odoo-mirovniki-config
+        - name: odoo-filestore-mirovniki-storage
+          persistentVolumeClaim:
+            claimName: odoo-filestore-mirovniki-pvc
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: odoo-mirovniki
+          image: odoo
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          envFrom:
+            - secretRef:
+                name: odoo-mirovniki-secrets
+          volumeMounts:
+            - name: odoo-mirovniki-config
+              mountPath: /etc/odoo/odoo.conf
+              subPath: odoo.conf
+            - name: odoo-filestore-mirovniki-storage
+              mountPath: /var/lib/odoo
+          args:
+            - "--db_user=$(DB_USER)"
+            - "--db_password=$(DB_PASSWORD)"
+            - "--smtp-user=$(SMTP_USER)"
+            - "--smtp-password=$(SMTP_PASSWORD)"
+          ports:
+            - containerPort: 8069
