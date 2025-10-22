@@ -55,8 +55,8 @@ def get_date_strings_for_deletion(
             yield date_candidate.strftime("%Y-%m-%d")
 
 
-def filter_project_files(file_name: str, project_name: str) -> bool:
-    return project_name + "_DB_" in file_name
+def filter_project_files(file_name: str, project_name: str, backup_type: str ="DB") -> bool:
+    return project_name + f"_{backup_type}_" in file_name
 
 
 def delete_files_from_bucket(
@@ -94,7 +94,7 @@ def delete_stale_backups(
     # list and count project backup files
     project_backup_files = list(
         filter(
-            lambda file_name: filter_project_files(file_name, project_name),
+            lambda file_name: filter_project_files(file_name, project_name, backup_type),
             [item.key for item in get_all_files(s3, bucket_name)],
         )
     )

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odoo-filestore-bojkot-pvc
+  labels:
+    app: odoo-bojkot
+spec:
+  storageClassName: "scw-bssd-retain"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

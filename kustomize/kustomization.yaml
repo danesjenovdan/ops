@@ -14,7 +14,8 @@ resources:
   # clickhouse
   - backups/db/backup-plausible-clickhouse.yaml
 
-  # postgres 15
+  # postgres 16
+  - backups/db/backup-bojkot.yaml
   - backups/db/backup-cnvos-acf.yaml
   - backups/db/backup-cnvos.yaml
   - backups/db/backup-consul-ankaran.yaml
@@ -38,6 +39,7 @@ resources:
   - backups/db/backup-kvak.yaml
   - backups/db/backup-lesson-plans.yaml
   - backups/db/backup-melita.yaml
+  - backups/db/backup-mirovniki.yaml
   - backups/db/backup-najemniski-sos.yaml
   # - backup-newsgradient.yaml archived
   - backups/db/backup-novdan.yaml
@@ -65,6 +67,7 @@ resources:
   - backups/db/backup-rog-stage.yaml
   - backups/db/backup-rog.yaml
   - backups/db/backup-stanovanjske-zadruge-zemljevid.yaml
+  - backups/db/backup-stanovanjskiblok.yaml
   - backups/db/backup-twito.yaml
   - backups/db/backup-vinopolis.yaml
   - backups/db/backup-weblate.yaml

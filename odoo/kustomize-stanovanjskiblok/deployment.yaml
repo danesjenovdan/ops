@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-stanovanjskiblok
+  labels:
+    app: odoo-stanovanjskiblok
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo-stanovanjskiblok
+  template:
+    metadata:
+      labels:
+        app: odoo-stanovanjskiblok
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - odoo-stanovanjskiblok
+              topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: odoo-stanovanjskiblok-config
+          configMap:
+            name: odoo-stanovanjskiblok-config
+        - name: odoo-filestore-stanovanjskiblok-storage
+          persistentVolumeClaim:
+            claimName: odoo-filestore-stanovanjskiblok-pvc
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: odoo-stanovanjskiblok
+          image: odoo
+          envFrom:
+            - secretRef:
+                name: odoo-stanovanjskiblok-secrets
+          volumeMounts:
+            - name: odoo-stanovanjskiblok-config
+              mountPath: /etc/odoo/odoo.conf
+              subPath: odoo.conf
+            - name: odoo-filestore-stanovanjskiblok-storage
+              mountPath: /var/lib/odoo
+          args:
+            - "--db_user=$(DB_USER)"
+            - "--db_password=$(DB_PASSWORD)"
+            - "--smtp-user=$(SMTP_USER)"
+            - "--smtp-password=$(SMTP_PASSWORD)"
+          ports:
+            - containerPort: 8069
