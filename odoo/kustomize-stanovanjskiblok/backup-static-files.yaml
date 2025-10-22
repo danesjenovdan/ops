@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-static-odoo-stanovanjskiblok
+spec:
+  schedule: "2 6 * * *" # Zaženi vsak dan ob 6:02
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - odoo-stanovanjskiblok
+                topologyKey: "kubernetes.io/hostname"
+          containers:
+            - name: backup-static-odoo-stanovanjskiblok
+              image: rg.fr-par.scw.cloud/djnd/backup-static-files:latest
+              args:
+              - /bin/bash
+              - /static_folder_backup.sh
+              envFrom:
+                - secretRef:
+                    name: secrets-backup-common
+              env:
+                - name: SOURCE_BASE_DIR
+                  value: "/var/lib/odoo" #"/var/www/html" # Glavna pot, kjer so podmape
+                - name: SUB_DIRS_TO_BACKUP
+                  value: "filestore" #"docroot/media,var/logs,config"
+                - name: PROJECT
+                  value: "odoo-stanovanjskiblok" # Ime projekta za poimenovanje datotek
+                - name: BACKUP_DIR
+                  value: "/tmp/backups" # Lahko se izpusti, če pustiš privzeto vrednost v skripti
+                - name: S3_BACKUP_PATH
+                  value: s3://djnd-backup-static
+                - name: S3_ENDPOINT_URL
+                  value: "https://s3.fr-par.scw.cloud"
+                - name: S3_REGION
+                  value: "fr-par"
+
+            # This is just for test backup
+              volumeMounts:
+                - name: odoo-filestore-stanovanjskiblok-storage
+                  mountPath: "/var/lib/odoo" # To mora biti isto kot SOURCE_BASE_DIR
+          volumes:
+            - name: odoo-filestore-stanovanjskiblok-storage
+              persistentVolumeClaim:
+                claimName: odoo-filestore-stanovanjskiblok-pvc
+          restartPolicy: Never
