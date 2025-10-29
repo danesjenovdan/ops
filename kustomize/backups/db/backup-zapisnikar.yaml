@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-zapisnikar
+spec:
+  schedule: 55 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-zapisnikar
+            image: backup-pg-16
+            args:
+            - /bin/bash
+            - /do_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-postgres
+            env:
+              - name: DATABASE_NAME
+                value: zapisnikar
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure

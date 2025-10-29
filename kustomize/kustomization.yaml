@@ -72,6 +72,7 @@ resources:
   - backups/db/backup-vinopolis.yaml
   - backups/db/backup-weblate.yaml
   - backups/db/backup-wiki-outline.yaml
+  - backups/db/backup-zapisnikar.yaml
   - backups/db/backup-zip.yaml
   - backups/db/backups-cleaner.yaml
 
