@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matweb
+  labels:
+    app: matweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matweb
+  template:
+    metadata:
+      labels:
+        app: matweb
+    spec:
+      volumes:
+        - name: mat2-quasar-frontend-volume
+          emptyDir: {}
+      containers:
+        - name: matweb
+          image: mat2-quasar-frontend
+          volumeMounts:
+            - name: mat2-quasar-frontend-volume
+              mountPath: /var/www/html
+          ports:
+          - containerPort: 8080
+          env:
+            - name: MAT_API_HOST_PLACEHOLDER
+              value: "https://matwebapi.lb.djnd.si/"
+            - name: FRONTEND_URL_PLACEHOLDER
+              value: "https://matweb.lb.djnd.si/"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matwebapi
+  labels:
+    app: matwebapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matwebapi
+  template:
+    metadata:
+      labels:
+        app: matwebapi
+    spec:
+      volumes:
+        - name: uwsgi-dir
+          emptyDir: {}
+        - name: upload-dir
+          emptyDir: {}
+      # securityContext:
+      #   runAsUser: 0
+      containers:
+        - name: matwebapi
+          image: mat2-web
+          volumeMounts:
+            - name: uwsgi-dir
+              mountPath: /run/uwsgi/
+            - name: upload-dir
+              mountPath: /app/upload/
+          ports:
+          - containerPort: 8080
+          env:
+            - name: MAT2_ALLOW_ORIGIN_WHITELIST
+              value: "https://matweb.lb.djnd.si"
