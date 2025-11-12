@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matweb
+spec:
+  selector:
+    app: matweb
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: matwebapi
+spec:
+  selector:
+    app: matwebapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

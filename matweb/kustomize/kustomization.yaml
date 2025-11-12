@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: matweb
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+images:
+- name: mat2-web
+  newName: "registry.0xacab.org/jvoisin/mat2-web"
+  newTag: "latest"
+- name: mat2-quasar-frontend
+  newName: "registry.0xacab.org/jfriedli/mat2-quasar-frontend"
+  newTag: "main"
