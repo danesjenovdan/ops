@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vodici-root-redirect
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://vodici.djnd.si/referendum/dostojna-smrt/
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - vodici.djnd.si
+        - vodici.danesjenovdan.si
+        - vodici.lb.djnd.si
+      secretName: volitveni-vodici-tls
+  rules:
+    - host: vodici.djnd.si
+      http: &http_paths
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: volitveni-vodic-referendum-dostojna-smrt-2025
+                port:
+                  number: 80
+    - host: vodici.danesjenovdan.si
+      http: *http_paths
+    - host: vodici.lb.djnd.si
+      http: *http_paths
