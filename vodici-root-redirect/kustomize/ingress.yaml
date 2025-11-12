@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: vodici-root-redirect
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     nginx.ingress.kubernetes.io/temporal-redirect: https://vodici.djnd.si/referendum/dostojna-smrt/
 spec:
   ingressClassName: nginx
