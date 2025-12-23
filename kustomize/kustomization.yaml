@@ -68,6 +68,7 @@ resources:
   - backups/db/backup-rog.yaml
   - backups/db/backup-stanovanjske-zadruge-zemljevid.yaml
   - backups/db/backup-stanovanjskiblok.yaml
+  - backups/db/backup-tiktok-brigade.yaml
   - backups/db/backup-twito.yaml
   - backups/db/backup-vinopolis.yaml
   - backups/db/backup-weblate.yaml
