@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: backup-tiktok-brigade
 spec:
-  schedule: 42 2 * * *
+  schedule: 51 2 * * *
   jobTemplate:
     spec:
       template:
