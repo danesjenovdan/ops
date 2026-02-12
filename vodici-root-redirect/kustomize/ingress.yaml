@@ -4,7 +4,7 @@ metadata:
   name: vodici-root-redirect
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    nginx.ingress.kubernetes.io/temporal-redirect: https://vodici.djnd.si/referendum/dostojna-smrt/
+    nginx.ingress.kubernetes.io/temporal-redirect: https://vodici.djnd.si/volitve/dz-2026/
 spec:
   ingressClassName: nginx
   tls:
@@ -21,7 +21,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: volitveni-vodic-referendum-dostojna-smrt-2025
+                name: volitveni-vodic-dz-2026
                 port:
                   number: 80
     - host: vodici.danesjenovdan.si
