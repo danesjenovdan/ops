@@ -38,7 +38,7 @@ spec:
 apiVersion: "clickhouse.altinity.com/v1"
 kind: "ClickHouseInstallation"
 metadata:
-  name: "clickhouse_bigger"
+  name: "clickhouse-bigger"
   namespace: "shared"
 spec:
   defaults:
