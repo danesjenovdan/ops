@@ -5,7 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - mejl.danesjenovdan.si
@@ -14,7 +14,7 @@ spec:
       secretName: google-workspace-redirects-tls
   rules:
     - host: mejl.danesjenovdan.si
-      http:
+      http: &http_paths
         paths:
           - path: /
             pathType: Prefix
@@ -24,22 +24,6 @@ spec:
                 port:
                   number: 80
     - host: drajv.danesjenovdan.si
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: google-workspace-redirects
-                port:
-                  number: 80
+      http: *http_paths
     - host: koledar.danesjenovdan.si
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: google-workspace-redirects
-                port:
-                  number: 80
+      http: *http_paths
