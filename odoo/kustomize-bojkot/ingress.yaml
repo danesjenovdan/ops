@@ -5,7 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - bojkot.si
@@ -13,7 +13,7 @@ spec:
       secretName: bojkot-tls
   rules:
     - host: bojkot.si
-      http:
+      http: &http_paths
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -23,12 +23,4 @@ spec:
                 port:
                   number: 8069
     - host: www.bojkot.si
-      http:
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: odoo-bojkot
-                port:
-                  number: 8069
+      http: *http_paths
