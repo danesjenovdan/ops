@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-domain
+spec:
+  redirectRegex:
+    regex: ^https?://vodici.djnd.si/(.*)
+    replacement: https://vodici.danesjenovdan.si/${1}
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-latest
+spec:
+  redirectRegex:
+    regex: ^https?://vodici.danesjenovdan.si/
+    replacement: https://vodici.danesjenovdan.si/volitve/dz-2026/
+    permanent: false
