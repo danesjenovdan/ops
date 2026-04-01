@@ -14,6 +14,6 @@ metadata:
   name: redirect-to-latest
 spec:
   redirectRegex:
-    regex: ^https?://vodici.danesjenovdan.si/
+    regex: ^https?://vodici.danesjenovdan.si/$
     replacement: https://vodici.danesjenovdan.si/volitve/dz-2026/
     permanent: false
