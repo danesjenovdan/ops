@@ -1,19 +1,32 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-domain
+spec:
+  redirectRegex:
+    regex: ^https?://weblate.djnd.si/(.*)
+    replacement: https://weblate.danesjenovdan.si/${1}
+    permanent: true
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: weblate
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      traefik-redirect-to-https@kubernetescrd,
+      weblate-redirect-domain@kubernetescrd
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
-        - weblate.lb.djnd.si
+        - weblate.djnd.si
+        - weblate.danesjenovdan.si
       secretName: weblate-tls
   rules:
-    - host: weblate.lb.djnd.si
-      http:
+    - host: weblate.djnd.si
+      http: &http_paths
         paths:
           - path: /
             pathType: Prefix
@@ -22,3 +35,5 @@ spec:
                 name: weblate
                 port:
                   number: 8080
+    - host: weblate.danesjenovdan.si
+      http: *http_paths
