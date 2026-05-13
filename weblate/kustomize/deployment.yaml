@@ -9,6 +9,8 @@ spec:
   selector:
     matchLabels:
       app: weblate
+  strategy:
+    type: Recreate # kill the old pod before starting a new one
   template:
     metadata:
       labels:
@@ -38,3 +40,9 @@ spec:
           envFrom:
             - secretRef:
                 name: weblate-credentials
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 60 # 60x10 = 600s = 10min to startup
