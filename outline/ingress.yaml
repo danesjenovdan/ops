@@ -1,28 +1,39 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-domain
+spec:
+  redirectRegex:
+    regex: ^https?://wiki.djnd.si/(.*)
+    replacement: https://wiki.danesjenovdan.si/${1}
+    permanent: true
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: outline
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($host != "wiki.danesjenovdan.si") {
-        rewrite ^/(.*) $scheme://wiki.danesjenovdan.si/$1 permanent;
-      }
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      traefik-redirect-to-https@kubernetescrd,
+      outline-redirect-domain@kubernetescrd
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
-  - hosts:
-    - wiki.danesjenovdan.si
-    secretName: wiki-tls
+    - hosts:
+        - wiki.djnd.si
+        - wiki.danesjenovdan.si
+      secretName: wiki-tls
   rules:
-  - host: wiki.danesjenovdan.si
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: outline
-            port:
-              number: 80
+    - host: wiki.djnd.si
+      http: &http_paths
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: outline
+                port:
+                  number: 80
+    - host: wiki.danesjenovdan.si
+      http: *http_paths
