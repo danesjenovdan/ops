@@ -20,7 +20,7 @@ resources:
   - backups/db/backup-cnvos.yaml
   - backups/db/backup-consul-ankaran.yaml
   - backups/db/backup-consul-celje.yaml
-  - backups/db/backup-consul-koper.yaml
+  # - backups/db/backup-consul-koper.yaml # NO LONGER DEPLOYED
   # - backups/db/backup-consul-maribor.yaml # NO LONGER DEPLOYED
   - backups/db/backup-consul-medvode.yaml
   - backups/db/backup-consul-nova-gorica.yaml
@@ -59,7 +59,6 @@ resources:
   - backups/db/backup-parlameter-zagreb.yaml
   - backups/db/backup-penpot.yaml
   - backups/db/backup-plausible.yaml
-  - backups/db/backup-podpri-pic.yaml
   - backups/db/backup-podpri.yaml
   - backups/db/backup-ppp-hr.yaml
   - backups/db/backup-ppp.yaml
