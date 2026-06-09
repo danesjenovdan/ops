@@ -82,16 +82,16 @@ resources:
 images:
   - name: backup-mariadb
     newName: rg.fr-par.scw.cloud/djnd/backup-mariadb
-    newTag: '58f10eae4338d77a1042c425d25a9f58aa3ec71f'
+    newTag: '28620d8051a19a1a2aa2e1f1371a7e2a3f596d91'
   - name: clickhouse-backup
     newName: rg.fr-par.scw.cloud/djnd/clickhouse-backup
-    newTag: '58f10eae4338d77a1042c425d25a9f58aa3ec71f'
+    newTag: '28620d8051a19a1a2aa2e1f1371a7e2a3f596d91'
   - name: backup-pg-16
     newName: rg.fr-par.scw.cloud/djnd/backup-pg-16
-    newTag: '58f10eae4338d77a1042c425d25a9f58aa3ec71f'
+    newTag: '28620d8051a19a1a2aa2e1f1371a7e2a3f596d91'
   - name: backups-cleaner
     newName: rg.fr-par.scw.cloud/djnd/backups-cleaner
-    newTag: '58f10eae4338d77a1042c425d25a9f58aa3ec71f'
+    newTag: '28620d8051a19a1a2aa2e1f1371a7e2a3f596d91'
   - name: backup-static-files
     newName: rg.fr-par.scw.cloud/djnd/backup-static-files
-    newTag: '58f10eae4338d77a1042c425d25a9f58aa3ec71f'
+    newTag: '28620d8051a19a1a2aa2e1f1371a7e2a3f596d91'
