@@ -15,5 +15,5 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https?://vodici.danesjenovdan.si/$
-    replacement: https://vodici.danesjenovdan.si/volitve/dz-2026/
+    replacement: https://vodici.danesjenovdan.si/referendum/proti-politicni-policiji/
     permanent: false
