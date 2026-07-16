@@ -5,25 +5,23 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
-  - hosts:
-    - matweb.lb.djnd.si
-    secretName: matweb-tls
+    - hosts:
+        - matweb.djnd.si
+      secretName: matweb-tls
   rules:
-    - host: matweb.lb.djnd.si
+    - host: matweb.djnd.si
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: matweb
-              port:
-                number: 80
-
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: matweb
+                port:
+                  number: 80
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -31,19 +29,19 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
-  - hosts:
-    - matwebapi.lb.djnd.si
-    secretName: matwebapi-tls
+    - hosts:
+        - matwebapi.djnd.si
+      secretName: matwebapi-tls
   rules:
-    - host: matwebapi.lb.djnd.si
+    - host: matwebapi.djnd.si
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: matwebapi
-              port:
-                number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: matwebapi
+                port:
+                  number: 80

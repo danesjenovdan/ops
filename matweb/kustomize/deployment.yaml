@@ -24,15 +24,13 @@ spec:
             - name: mat2-quasar-frontend-volume
               mountPath: /var/www/html
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
           env:
             - name: MAT_API_HOST_PLACEHOLDER
-              value: "https://matwebapi.lb.djnd.si/"
+              value: "https://matwebapi.djnd.si/"
             - name: FRONTEND_URL_PLACEHOLDER
-              value: "https://matweb.lb.djnd.si/"
-
+              value: "https://matweb.djnd.si/"
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -65,7 +63,7 @@ spec:
             - name: upload-dir
               mountPath: /app/upload/
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
           env:
             - name: MAT2_ALLOW_ORIGIN_WHITELIST
-              value: "https://matweb.lb.djnd.si"
+              value: "https://matweb.djnd.si"

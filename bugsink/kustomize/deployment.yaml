@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bugsink
+  labels:
+    app: bugsink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bugsink
+  template:
+    metadata:
+      labels:
+        app: bugsink
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: bugsink
+          image: bugsink/bugsink:2
+          envFrom:
+            - secretRef:
+                name: bugsink-secrets
+          ports:
+            - containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            periodSeconds: 10
+            failureThreshold: 60 # 60x10 = 600s = 10min
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
