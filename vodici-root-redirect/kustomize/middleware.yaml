@@ -17,3 +17,13 @@ spec:
     regex: ^https?://vodici.danesjenovdan.si/$
     replacement: https://vodici.danesjenovdan.si/referendum/proti-politicni-policiji/
     permanent: false
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: mocljudem-redirect-to-latest
+spec:
+  redirectRegex:
+    regex: ^https?://vodici.mocljudem.si/$
+    replacement: https://vodici.mocljudem.si/digitalna-identiteta/
+    permanent: false
