@@ -46,7 +46,7 @@ spec:
       secretName: vodici-mocljudem-tls
   rules:
     - host: vodici.mocljudem.si
-      http: &http_paths
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -55,8 +55,6 @@ spec:
                 name: volitveni-vodic-mocljudem-digitalna-identiteta-2026
                 port:
                   number: 80
-    - host: vodici.mocljudem.si
-      http: *http_paths
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
