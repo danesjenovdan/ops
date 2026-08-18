@@ -8,6 +8,7 @@ resources:
 
   # mariadb
   - backups/db/backup-brezkvasa.yaml
+  - backups/db/backup-kimai.yaml
   - backups/db/backup-mautic.yaml
   - backups/db/backup-zvizgac.yaml
 

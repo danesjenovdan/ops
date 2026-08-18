@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-kimai
+spec:
+  schedule: 49 2 * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-kimai
+            image: backup-mariadb
+            args:
+            - /bin/bash
+            - /do_mariadb_backup.sh
+            envFrom:
+              - secretRef:
+                  name: secrets-backup-common
+              - secretRef:
+                  name: secrets-backup-mariadb
+            env:
+              - name: DATABASE_NAME
+                value: kimai
+              - name: S3_BACKUP_PATH
+                value: s3://djnd-backups
+          restartPolicy: OnFailure

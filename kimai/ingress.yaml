@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kimai
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      traefik-redirect-to-https@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - kimai.lb2.djnd.si
+        - kimai.djnd.si
+      secretName: kimai-tls
+  rules:
+    - host: kimai.lb2.djnd.si
+      http: &http_paths
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kimai
+                port:
+                  number: 80
+    - host: kimai.djnd.si
+      http: *http_paths
