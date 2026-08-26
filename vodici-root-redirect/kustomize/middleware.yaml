@@ -21,6 +21,16 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
+  name: mocljudem-redirect-domain
+spec:
+  redirectRegex:
+    regex: ^https?://vodici.moc-ljudem.si/(.*)
+    replacement: https://vodici.mocljudem.si/${1}
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
   name: mocljudem-redirect-to-latest
 spec:
   redirectRegex:

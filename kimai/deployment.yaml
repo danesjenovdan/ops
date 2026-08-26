@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kimai
+  labels:
+    app: kimai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kimai
+  strategy:
+    type: Recreate # single RWO volume, kill the old pod before starting the new one
+  template:
+    metadata:
+      labels:
+        app: kimai
+    spec:
+      volumes:
+        - name: kimai-data
+          persistentVolumeClaim:
+            claimName: kimai-data-pvc
+      containers:
+        - name: kimai
+          image: kimai
+          ports:
+            - containerPort: 8001
+          envFrom:
+            - secretRef:
+                name: kimai-env
+          env:
+            # SSL is terminated at the ingress; trust the in-cluster proxy so
+            # Kimai detects https and generates correct absolute URLs.
+            - name: TRUSTED_PROXIES
+              value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+            - name: memory_limit
+              value: "256M"
+          volumeMounts:
+            - name: kimai-data
+              mountPath: /opt/kimai/var/data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8001
+              httpHeaders:
+                - name: Host
+                  value: kimai.lb2.djnd.si
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8001
+              httpHeaders:
+                - name: Host
+                  value: kimai.lb2.djnd.si
+            initialDelaySeconds: 60
+            periodSeconds: 30

@@ -37,16 +37,18 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.middlewares: |
       traefik-redirect-to-https@kubernetescrd,
+      vodici-mocljudem-redirect-domain@kubernetescrd,
       vodici-mocljudem-redirect-to-latest@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
         - vodici.mocljudem.si
+        - vodici.moc-ljudem.si
       secretName: vodici-mocljudem-tls
   rules:
     - host: vodici.mocljudem.si
-      http:
+      http: &http_paths_ml
         paths:
           - path: /
             pathType: Prefix
@@ -55,6 +57,8 @@ spec:
                 name: volitveni-vodic-mocljudem-digitalna-identiteta-2026
                 port:
                   number: 80
+    - host: vodici.moc-ljudem.si
+      http: *http_paths_ml
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
