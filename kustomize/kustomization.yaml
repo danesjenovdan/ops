@@ -41,6 +41,7 @@ resources:
   - backups/db/backup-lesson-plans.yaml
   - backups/db/backup-melita.yaml
   - backups/db/backup-mirovniki.yaml
+  - backups/db/backup-mocljudem.yaml
   - backups/db/backup-najemniski-sos.yaml
   # - backup-newsgradient.yaml archived
   - backups/db/backup-novdan.yaml
