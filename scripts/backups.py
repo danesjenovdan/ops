@@ -1,13 +1,15 @@
 from typing import Iterator, List
 
 from datetime import datetime, date, timedelta
-import sys
+import sys, os
 
 import boto3
 import click
 
 # setup (based on your ~/.aws-config)
 s3_from_config = boto3.resource("s3", endpoint_url="https://s3.fr-par.scw.cloud")
+
+no_backup_history_projects = os.environ.get("NO_BACKUP_HISTORY_PROJECTS", "").split(",") or []
 
 
 def get_all_files(
@@ -48,10 +50,18 @@ def box_print(text: str) -> None:
 def get_date_strings_for_deletion(
     min_date: date,
     max_date: date,
+    no_history: bool = False,
 ) -> Iterator[str]:
+    """
+    Generates a list of date strings for deletion, excluding the first day of each month unless no_history is True.
+    min_date: The minimum date to consider for deletion.
+    max_date: The maximum date to consider for deletion.
+    no_history: If True, includes the first day of each month in the deletion list. It's used when database contains
+    privacy sensitive data and we want to delete all backups, not just the stale ones.
+    """
     for i in range((max_date - min_date).days):
         date_candidate = min_date + timedelta(days=i)
-        if date_candidate.day != 1:
+        if date_candidate.day != 1 or no_history:
             yield date_candidate.strftime("%Y-%m-%d")
 
 
@@ -82,6 +92,11 @@ def delete_stale_backups(
     force: bool = False,
 ) -> None:
 
+    if project_name in no_backup_history_projects:
+        no_history = True
+    else:
+        no_history = False
+
     # prepare cutoff date
     if cutoff_date is None:
         today = datetime.today()
@@ -102,7 +117,7 @@ def delete_stale_backups(
 
     # prepare list of files to delete
     date_strings_for_deletion = [
-        s for s in get_date_strings_for_deletion(date(2022, 1, 1), cutoff_date)
+        s for s in get_date_strings_for_deletion(date(2022, 1, 1), cutoff_date, no_history=no_history)
     ]
     files_to_delete = [
         file_name
