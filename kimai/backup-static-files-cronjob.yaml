@@ -14,7 +14,7 @@ spec:
               requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
                   matchExpressions:
-                  - key: app.kubernetes.io/name
+                  - key: app
                     operator: In
                     values:
                     - kimai
@@ -27,7 +27,7 @@ spec:
               - /static_folder_backup.sh
               envFrom:
                 - secretRef:
-                    name: static-backup # secrets-mautic-backup
+                    name: secret-backup-files
               env:
                 - name: SOURCE_BASE_DIR
                   value: "/" #"/var/www/html" # Glavna pot, kjer so podmape
