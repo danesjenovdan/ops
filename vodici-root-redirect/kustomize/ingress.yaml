@@ -23,7 +23,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: volitveni-vodic-dz-2026
+                name: volitveni-vodic-4xproti
                 port:
                   number: 80
     - host: vodici.danesjenovdan.si
