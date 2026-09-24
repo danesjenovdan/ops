@@ -15,7 +15,7 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https?://vodici.danesjenovdan.si/$
-    replacement: https://vodici.danesjenovdan.si/referendum/proti-politicni-policiji/
+    replacement: https://vodici.danesjenovdan.si/referendum/4xproti/
     permanent: false
 ---
 apiVersion: traefik.io/v1alpha1
