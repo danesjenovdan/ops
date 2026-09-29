@@ -51,16 +51,6 @@ jobs:
             rg.fr-par.scw.cloud/djnd/clickhouse-backup:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/clickhouse-backup:latest
 
-      - name: Update image versions in kustomize/kustomization.yaml
-        run: |
-          sed -i "s/newTag: .*\+/newTag\: '${{ github.sha }}'/" kustomize/kustomization.yaml
-
-      - name: Commit and push new image versions
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: '.'
-          message: 'Update image versions in kustomize/kustomization.yaml'
-
       - name: Build and push backup-pg-16
         uses: docker/build-push-action@v3
         with:
@@ -80,7 +70,7 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backups-cleaner:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backups-cleaner:latest
-      
+
       - name: Build and push backup-static-files
         uses: docker/build-push-action@v3
         with:
@@ -90,3 +80,13 @@ jobs:
           tags: |
             rg.fr-par.scw.cloud/djnd/backup-static-files:${{ github.sha }}
             rg.fr-par.scw.cloud/djnd/backup-static-files:latest
+
+      - name: Update image versions in kustomize/kustomization.yaml
+        run: |
+          sed -i "s/newTag: .*\+/newTag\: '${{ github.sha }}'/" kustomize/kustomization.yaml
+
+      - name: Commit and push new image versions
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: '.'
+          message: 'Update image versions in kustomize/kustomization.yaml'
