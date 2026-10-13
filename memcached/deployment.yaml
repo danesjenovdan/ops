@@ -20,12 +20,9 @@ spec:
             name: memcached-sasl-config
         - name: sasl-db
           emptyDir: {}
-        - name: memcached-secret
-          secret:
-            secretName: memcached-auth
       initContainers:
         - name: sasl-init
-          image: debian:bullseye-slim
+          image: debian:trixie-slim
           envFrom:
             - secretRef:
                 name: memcached-auth
@@ -36,17 +33,16 @@ spec:
               apt-get update && \
               apt-get install -y sasl2-bin libsasl2-modules && \
               echo "$PASSWORD" | saslpasswd2 -p -c -f /etc/sasl2/memcached-sasldb2 "$USERNAME" && \
-              chown 11211:11211 /etc/sasl2/memcached-sasldb2
+              chown 11211:11211 /etc/sasl2/memcached-sasldb2 && \
+              echo "SASL initialization complete"
 
           volumeMounts:
             - name: sasl-db
               mountPath: /etc/sasl2
-            - name: memcached-secret
-              mountPath: /memcached-secret
       containers:
         - name: memcached-djnd
           image: memcached
-          args: ["-S", "-vv", "-m", "2048"]
+          args: ["-S", "-v", "-m", "2048"]
           env:
             - name: MEMCACHED_TLS_PORT
               value: "11211"
