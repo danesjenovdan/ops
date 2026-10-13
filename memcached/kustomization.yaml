@@ -8,4 +8,4 @@ resources:
 images:
   - name: memcached
     newName: memcached
-    newTag: "1.6.39-alpine"
+    newTag: "1.6.39"
