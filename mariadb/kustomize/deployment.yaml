@@ -16,6 +16,7 @@ spec:
       labels:
         app: mariadb-djnd
     spec:
+      priorityClassName: database-critical
       affinity:
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

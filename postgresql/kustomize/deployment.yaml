@@ -14,6 +14,7 @@ spec:
       labels:
         app: postgresql-djnd
     spec:
+      priorityClassName: database-critical
       affinity:
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

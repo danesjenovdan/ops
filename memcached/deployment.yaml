@@ -13,6 +13,7 @@ spec:
       labels:
         app: memcached-djnd
     spec:
+      priorityClassName: database-critical
       volumes:
         - name: sasl-config
           configMap:
