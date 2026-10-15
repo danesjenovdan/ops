@@ -17,9 +17,11 @@ spec:
       initContainers:
       - name: migrate-outline
         image: outline
-        command: ['yarn', 'sequelize:migrate', '--env=production-ssl-disabled']
+        command: ['npm', 'run', 'db:migrate', '--', '--env=production-ssl-disabled']
         # command: ['node', './build/server/scripts/20210226232041-migrate-authentication.js']
         env:
+          - name: PGSSLMODE
+            value: disable
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
@@ -124,14 +126,14 @@ spec:
                 key: smtpReplyEmail
           - name: DEFAULT_LANGUAGE
             value: en_US
-          - name: PGSSLMODE
-            value: disable
       containers:
       - name: outline
         image: outline
         ports:
         - containerPort: 3000
         env:
+          - name: PGSSLMODE
+            value: disable
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
@@ -237,5 +239,3 @@ spec:
                 key: smtpReplyEmail
           - name: DEFAULT_LANGUAGE
             value: en_US
-          - name: PGSSLMODE
-            value: disable
