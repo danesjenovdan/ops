@@ -21,7 +21,7 @@ spec:
                   name: secrets-backup-postgres
             env:
               - name: DATABASE_NAME
-                value: pravnamreza
+                value: pravna_mreza
               - name: S3_BACKUP_PATH
                 value: s3://djnd-backups
           restartPolicy: OnFailure

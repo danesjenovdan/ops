@@ -45,28 +45,6 @@ spec:
               secretKeyRef:
                 name: outline-env
                 key: port
-          - name: SLACK_KEY
-            valueFrom:
-              secretKeyRef:
-                name: outline-env
-                key: slackKey
-          - name: SLACK_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: outline-env
-                key: slackSecret
-          - name: SLACK_VERIFICATION_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: outline-env
-                key: slackVerificationToken
-          - name: SLACK_APP_ID
-            valueFrom:
-              secretKeyRef:
-                name: outline-env
-                key: slackAppId
-          - name: SLACK_MESSAGE_ACTIONS
-            value: "true"
           - name: FORCE_HTTPS
             value: "false"
           - name: ENABLE_UPDATES
