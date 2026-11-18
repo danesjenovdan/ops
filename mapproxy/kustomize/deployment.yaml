@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mapproxy
+  labels:
+    app: mapproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mapproxy
+  template:
+    metadata:
+      labels:
+        app: mapproxy
+    spec:
+      volumes:
+        - name: cache-data
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: mapproxy-config
+      containers:
+        - name: mapproxy
+          image: ghcr.io/mapproxy/mapproxy/mapproxy:8.1.0-nginx
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: cache-data
+              mountPath: /mapproxy/config/cache_data
+            - name: config
+              mountPath: /mapproxy/config/mapproxy.yaml
+              subPath: mapproxy.yaml
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 500m
+            limits:
+              memory: 500Mi
+              cpu: 500m
