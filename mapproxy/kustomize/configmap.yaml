@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mapproxy-config
+data:
+  mapproxy.yaml: |
+    services:
+      tms:
+
+    layers:
+      - name: osm
+        title: Open Streetmap Tiles
+        sources: [osm_cache]
+
+    caches:
+      osm_cache:
+        grids: [GLOBAL_WEBMERCATOR]
+        sources: [osm_tiles]
+        format: image/png
+
+    sources:
+      osm_tiles:
+        type: tile
+        grid: GLOBAL_WEBMERCATOR
+        url: https://tile.openstreetmap.org/%(z)s/%(x)s/%(y)s.png
